@@ -21,7 +21,7 @@ export const CommandMenu = ({
 
     document.addEventListener("keydown", down);
     return () => document.removeEventListener("keydown", down);
-  }, []);
+  }, [setOpen]);
 
   return (
     <Command.Dialog
@@ -39,13 +39,13 @@ export const CommandMenu = ({
           value={value}
           onValueChange={setValue}
           placeholder="What do you need"
+          aria-label="Search command menu"
           className="relative border-b border-stone-300 p-3 text-lg w-full placeholder:text-stone-400 focus:outline-none"
         />
         
         <Command.List className="p-3">
           <Command.Empty>
-            No results found for {" "}
-            <span className="text-violet-500">"{value}"</span>
+          No results found for <span className="text-violet-500">&quot;{value}&quot;</span>
           </Command.Empty>
 
           <Command.Group heading="Team" className="text-sm mb-3 text-stone-400">
