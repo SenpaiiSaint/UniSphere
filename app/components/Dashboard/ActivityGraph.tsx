@@ -10,7 +10,6 @@ import {
   line as d3_line,
   curveNatural as d3_curveNatural,
 } from "d3";
-import { UsageRadar } from "./UsageRadar";
 
 // Sample sales data
 const sales = [
