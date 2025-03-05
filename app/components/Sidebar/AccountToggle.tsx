@@ -5,7 +5,7 @@ export const AccountToggle = () => {
   return (
     <div className="border-b mb-4 mt-2 pb-4 border-stone-300">
 
-        {/* Hover issue with button*/}
+      
 
       <button className="flex p-0.5 hover:bg-stone-200 rounded transition-colors relative gap-2 w-full items-center">
         <img
@@ -18,7 +18,7 @@ export const AccountToggle = () => {
             <span className="text-xs block text-stone-500">satoshi@labs.dev</span>
         </div>
 
-        {/* Reposition Icon to be more center*/}
+        
         <FiGrid className="absolute right-2 top-1-translate-y-[2px] text-md" />
 
   </button>
