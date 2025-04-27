@@ -9,7 +9,11 @@ import { RecentAnnouncements } from './RecentAnnouncements'
 
 export const Dashboard = () => {
   return (
+<<<<<<< HEAD
     <div className='bg-white rounded-lg shadow min-h-screen -mt-4 pt-4'>
+=======
+    <div className='bg-white rounded-lg pb-4 shadow '>
+>>>>>>> 34394c622616a42f37289c110713b50935219b9d
       <TopBar />
       <div className='p-6 space-y-8'>
         <Grid />

@@ -2,5 +2,9 @@
     "cSpell.words": [
         "cmdk",
         "Satoshi"
-    ]
+    ],
+    "files.autoSave": "afterDelay",
+    "material-icon-theme.folders.associations": {
+        
+    }
 }
