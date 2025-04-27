@@ -5,13 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-<<<<<<< HEAD
   title: "University Management System",
-  description: "Comprehensive university management system for courses, students, and grades",
-=======
-  title: "SaaS Dashboard",
-  description: "Designed by BlueSky Labs",
->>>>>>> 34394c622616a42f37289c110713b50935219b9d
+  description: "Comprehensive university management system for courses, students, and grades"
 };
 
 export default function RootLayout({
