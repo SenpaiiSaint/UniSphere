@@ -3,7 +3,6 @@
 import React, { createContext, useContext, useState, useCallback, useRef } from 'react';
 import { Toast } from './Toast';
 import { Toast as ToastType } from '@/app/types';
-import { CheckCircleIcon, XCircleIcon, InformationCircleIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 
 interface ToastContextType {
   addToast: (toast: Omit<ToastType, 'id'>) => void;

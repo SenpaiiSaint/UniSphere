@@ -30,6 +30,12 @@ export interface Student {
   riskFactors: string[];
 }
 
+export interface RubricItem {
+  category: string;
+  criteria: string;
+  weight: number;
+}
+
 export interface Assignment {
   id: string;
   courseId: string;
@@ -166,7 +172,7 @@ const generateRandomPerformance = () => {
 const generateStudents = () => {
   const students: Student[] = [];
   const majors = ['Computer Science', 'Mathematics', 'Engineering', 'Physics', 'Biology'];
-  const years = ['Freshman', 'Sophomore', 'Junior', 'Senior'];
+  const years: ('Freshman' | 'Sophomore' | 'Junior' | 'Senior')[] = ['Freshman', 'Sophomore', 'Junior', 'Senior'];
   
   // Generate 40 students to support the largest class size
   for (let i = 1; i <= 40; i++) {
@@ -178,7 +184,7 @@ const generateStudents = () => {
     const cs501Performance = generateRandomPerformance();
     
     // Generate random GPA with more variation
-    const gpa = (Math.random() * 2.5 + 1.5).toFixed(2); // 1.5-4.0
+    const gpa = Number((Math.random() * 2.5 + 1.5).toFixed(2)); // 1.5-4.0
     
     students.push({
       id: `S${i.toString().padStart(3, '0')}`,

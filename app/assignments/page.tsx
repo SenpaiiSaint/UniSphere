@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { format } from 'date-fns';
 import { mockCourses } from '../data/mockData';
 import { mockAssignments } from '../data/mockAssignments';
 import { MainLayout } from '../components/Layout/MainLayout';

@@ -1,4 +1,6 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /*
 ---break---
@@ -161,7 +163,10 @@ body {
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
+    outline-color: var(--ring);
+    outline-width: 1px;
+    outline-offset: 2px;
   }
   body {
     @apply bg-background text-foreground;
