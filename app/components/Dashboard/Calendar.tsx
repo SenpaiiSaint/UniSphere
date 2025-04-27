@@ -1,11 +1,16 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isToday, isSameDay } from 'date-fns';
 
 export const Calendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const monthStart = startOfMonth(currentDate);
   const monthEnd = endOfMonth(currentDate);
@@ -41,6 +46,10 @@ export const Calendar = () => {
     setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1));
   };
 
+  if (!mounted) {
+    return null;
+  }
+
   return (
     <div className="bg-white rounded-lg shadow p-4">
       <div className="flex items-center justify-between mb-4">
@@ -51,12 +60,14 @@ export const Calendar = () => {
           <button
             onClick={previousMonth}
             className="p-2 hover:bg-gray-100 rounded-lg"
+            suppressHydrationWarning
           >
             <FiChevronLeft className="w-5 h-5" />
           </button>
           <button
             onClick={nextMonth}
             className="p-2 hover:bg-gray-100 rounded-lg"
+            suppressHydrationWarning
           >
             <FiChevronRight className="w-5 h-5" />
           </button>

@@ -11,7 +11,7 @@ export function MainLayout({ children }: MainLayoutProps) {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-white">
       <Sidebar isCollapsed={isCollapsed} onCollapse={setIsCollapsed} />
       <main className={`${isCollapsed ? 'pl-16' : 'pl-64'} transition-all duration-300 min-h-screen`}>
         <div className="p-6">

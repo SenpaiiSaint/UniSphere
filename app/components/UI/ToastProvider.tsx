@@ -1,8 +1,9 @@
 'use client';
 
-import { createContext, useContext, useState, useCallback } from 'react';
+import React, { createContext, useContext, useState, useCallback, useRef } from 'react';
 import { Toast } from './Toast';
 import { Toast as ToastType } from '@/app/types';
+import { CheckCircleIcon, XCircleIcon, InformationCircleIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 
 interface ToastContextType {
   addToast: (toast: Omit<ToastType, 'id'>) => void;
@@ -13,9 +14,10 @@ const ToastContext = createContext<ToastContextType | undefined>(undefined);
 
 export function ToastProvider({ children }: { children: React.ReactNode }) {
   const [toasts, setToasts] = useState<ToastType[]>([]);
+  const idCounter = useRef(0);
 
   const addToast = useCallback((toast: Omit<ToastType, 'id'>) => {
-    const id = Date.now().toString();
+    const id = `toast-${idCounter.current++}`;
     setToasts(prev => [...prev, { ...toast, id }]);
   }, []);
 

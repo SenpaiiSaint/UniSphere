@@ -24,10 +24,10 @@ export function Toast({ id, type, message, duration = 5000, onClose }: ToastProp
   }, [duration, onClose]);
 
   const iconClasses = {
-    success: 'text-green-400',
-    error: 'text-red-400',
-    info: 'text-blue-400',
-    warning: 'text-yellow-400'
+    success: 'text-green-600',
+    error: 'text-red-600',
+    info: 'text-blue-600',
+    warning: 'text-yellow-600'
   };
 
   const bgClasses = {
@@ -38,10 +38,10 @@ export function Toast({ id, type, message, duration = 5000, onClose }: ToastProp
   };
 
   const textClasses = {
-    success: 'text-green-800',
-    error: 'text-red-800',
-    info: 'text-blue-800',
-    warning: 'text-yellow-800'
+    success: 'text-green-900',
+    error: 'text-red-900',
+    info: 'text-blue-900',
+    warning: 'text-yellow-900'
   };
 
   const icons = {

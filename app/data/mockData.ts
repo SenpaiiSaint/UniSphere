@@ -154,7 +154,7 @@ const generateRandomPerformance = () => {
   // Different base ranges for grades
   const gradeBases = [60, 70, 80]; // Lower, Medium, Higher
   const gradeVariations = [30, 25, 20]; // More variation for lower ranges
-  
+
   return {
     attendance: Math.floor(Math.random() * attendanceVariations[attendanceRange]) + attendanceBases[attendanceRange],
     grade: Math.floor(Math.random() * gradeVariations[gradeRange]) + gradeBases[gradeRange],

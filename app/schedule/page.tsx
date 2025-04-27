@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { MainLayout } from '../components/Layout/MainLayout';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import { mockCourses } from '../data/mockData';
+import { format } from 'date-fns';
 
 export default function SchedulePage() {
   const [selectedView, setSelectedView] = useState('weekly');
@@ -61,22 +62,24 @@ export default function SchedulePage() {
               </div>
               <div className="flex flex-wrap items-center gap-4 w-full md:w-auto">
                 <select
-                  className="block w-full md:w-48 rounded-xl border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm bg-white/80 backdrop-blur-sm py-2.5 truncate"
+                  className="block w-full md:w-48 rounded-xl border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm bg-white/80 backdrop-blur-sm py-2.5 truncate text-gray-900"
                   value={selectedCourse}
                   onChange={(e) => setSelectedCourse(e.target.value)}
                 >
-                  <option value="">All Courses</option>
+                  <option value="" className="text-gray-900">All Courses</option>
                   {mockCourses.map(course => (
-                    <option key={course.id} value={course.id} className="truncate">{course.name}</option>
+                    <option key={course.id} value={course.id} className="text-gray-900">
+                      {course.name}
+                    </option>
                   ))}
                 </select>
                 <select
-                  className="block w-full md:w-48 rounded-xl border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm bg-white/80 backdrop-blur-sm py-2.5 truncate"
+                  className="block w-full md:w-48 rounded-xl border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm bg-white/80 backdrop-blur-sm py-2.5 truncate text-gray-900"
                   value={selectedView}
                   onChange={(e) => setSelectedView(e.target.value)}
                 >
-                  <option value="weekly">Weekly View</option>
-                  <option value="monthly">Monthly View</option>
+                  <option value="weekly" className="text-gray-900">Weekly View</option>
+                  <option value="monthly" className="text-gray-900">Monthly View</option>
                 </select>
                 <button
                   className="w-full md:w-auto px-5 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 text-sm font-medium whitespace-nowrap"
@@ -104,7 +107,7 @@ export default function SchedulePage() {
                   >
                     <ChevronLeftIcon className="h-6 w-6 text-gray-600" />
                   </button>
-                  <span className="text-lg sm:text-xl font-semibold text-gray-700 bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent truncate px-4">
+                  <span className="text-lg sm:text-xl font-semibold text-gray-900 bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent truncate px-4">
                     {getWeekDates().start.toLocaleDateString()} - {getWeekDates().end.toLocaleDateString()}
                   </span>
                   <button
@@ -133,10 +136,10 @@ export default function SchedulePage() {
                         }`}
                       >
                         <div className="font-bold text-gray-900 text-lg mb-1 truncate">
-                          {date.toLocaleDateString('default', { weekday: 'short' })}
+                          {format(date, 'EEE')}
                         </div>
-                        <div className="text-sm text-gray-500 mb-4 truncate">
-                          {date.toLocaleDateString('default', { month: 'short', day: 'numeric' })}
+                        <div className="text-sm text-gray-700 mb-4 truncate">
+                          {format(date, 'MMM d')}
                         </div>
                         <div className="space-y-3">
                           {dayCourses.map(course => (
@@ -145,10 +148,10 @@ export default function SchedulePage() {
                               className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1"
                             >
                               <div className="font-semibold text-gray-900 text-sm truncate">{course.name}</div>
-                              <div className="text-sm text-gray-500 mt-1.5 truncate">
+                              <div className="text-sm text-gray-700 mt-1.5 truncate">
                                 {course.schedule.time}
                               </div>
-                              <div className="text-xs text-gray-400 mt-1.5 flex items-center truncate">
+                              <div className="text-xs text-gray-600 mt-1.5 flex items-center truncate">
                                 <span className="w-2 h-2 bg-blue-500 rounded-full mr-2 flex-shrink-0"></span>
                                 <span className="truncate">{course.schedule.location}</span>
                               </div>
@@ -173,7 +176,7 @@ export default function SchedulePage() {
                   >
                     <ChevronLeftIcon className="h-6 w-6 text-gray-600" />
                   </button>
-                  <span className="text-lg sm:text-xl font-semibold text-gray-700 bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent truncate px-4">
+                  <span className="text-lg sm:text-xl font-semibold text-gray-900 bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent truncate px-4">
                     {getMonthName(currentMonth)}
                   </span>
                   <button
@@ -189,7 +192,7 @@ export default function SchedulePage() {
                 </div>
                 <div className="grid grid-cols-7 gap-2">
                   {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-                    <div key={day} className="text-center font-semibold text-gray-500 py-3 bg-white/80 backdrop-blur-sm rounded-xl text-sm truncate">
+                    <div key={day} className="text-center font-semibold text-gray-700 py-3 bg-white/80 backdrop-blur-sm rounded-xl text-sm truncate">
                       {day}
                     </div>
                   ))}
@@ -222,7 +225,7 @@ export default function SchedulePage() {
                               <div className="font-medium text-sm text-gray-900 truncate">
                                 {course.name}
                               </div>
-                              <div className="text-xs text-gray-500 truncate flex items-center mt-1">
+                              <div className="text-xs text-gray-600 truncate flex items-center mt-1">
                                 <span className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-1.5 flex-shrink-0"></span>
                                 <span className="truncate">{course.schedule.time}</span>
                               </div>

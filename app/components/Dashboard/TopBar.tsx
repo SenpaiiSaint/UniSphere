@@ -1,13 +1,22 @@
 'use client'
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { FiBell, FiSearch } from 'react-icons/fi'
 import { format } from 'date-fns'
 import { AcademicCalendar } from './AcademicCalendar'
 
 export const TopBar = () => {
-  const currentDate = new Date()
-  const formattedDate = format(currentDate, 'EEEE, MMMM do yyyy')
+  const [mounted, setMounted] = useState(false)
+  const [formattedDate, setFormattedDate] = useState('')
+
+  useEffect(() => {
+    setMounted(true)
+    setFormattedDate(format(new Date(), 'EEEE, MMMM do yyyy'))
+  }, [])
+
+  if (!mounted) {
+    return null
+  }
 
   return (
     <div className='border-b px-4 mb-4 mt-2 pb-4 border-stone-200'>
@@ -27,7 +36,7 @@ export const TopBar = () => {
             <FiSearch className="absolute left-2 top-1/2 transform -translate-y-1/2 text-stone-400" />
           </div>
 
-          <button className="relative p-2 text-stone-600 hover:text-blue-600 transition-colors">
+          <button className="relative p-2 text-stone-600 hover:text-blue-600 transition-colors" suppressHydrationWarning>
             <FiBell className="w-5 h-5" />
             <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
           </button>
