@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { IconType } from 'react-icons';
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { IconType } from "react-icons";
 import {
   FiHome,
   FiBook,
@@ -17,17 +17,16 @@ import {
   FiMessageCircle,
   FiChevronsLeft,
   FiChevronsRight,
-} from 'react-icons/fi';
+} from "react-icons/fi";
 import {
   SunIcon,
   MoonIcon,
   ClockIcon,
   CommandLineIcon,
-} from '@heroicons/react/24/outline';
-import { AccountToggle } from './AccountToggle';
-import { Button } from '../UI/Button';
+} from "@heroicons/react/24/outline";
+import { AccountToggle } from "./AccountToggle";
+import { Button } from "../UI/Button";
 
-// Define your menu items
 export type MenuItem = {
   title: string;
   Icon: IconType;
@@ -36,31 +35,31 @@ export type MenuItem = {
 };
 
 const menuItems: MenuItem[] = [
-  { title: 'Dashboard', Icon: FiHome, path: '/' },
-  { title: 'Courses', Icon: FiBook, path: '/courses', badge: 2 },
-  { title: 'Students', Icon: FiUsers, path: '/students' },
-  { title: 'Schedule', Icon: FiCalendar, path: '/schedule', badge: 1 },
-  { title: 'Assignments', Icon: FiFileText, path: '/assignments', badge: 3 },
-  { title: 'Grades', Icon: FiBarChart2, path: '/grades' },
-  { title: 'Messages', Icon: FiMail, path: '/messages', badge: 5 },
-  { title: 'Settings', Icon: FiSettings, path: '/settings' },
+  { title: "Dashboard", Icon: FiHome, path: "/" },
+  { title: "Courses", Icon: FiBook, path: "/courses", badge: 2 },
+  { title: "Students", Icon: FiUsers, path: "/students" },
+  { title: "Schedule", Icon: FiCalendar, path: "/schedule", badge: 1 },
+  { title: "Assignments", Icon: FiFileText, path: "/assignments", badge: 3 },
+  { title: "Grades", Icon: FiBarChart2, path: "/grades" },
+  { title: "Messages", Icon: FiMail, path: "/messages", badge: 5 },
+  { title: "Settings", Icon: FiSettings, path: "/settings" },
 ];
 
 const quickActions = [
-  { icon: FiPlus, label: 'New Assignment', action: () => {} },
-  { icon: FiCalendar, label: 'Schedule Class', action: () => {} },
-  { icon: FiMessageCircle, label: 'Send Announcement', action: () => {} },
+  { icon: FiPlus, label: "New Assignment", action: () => {} },
+  { icon: FiCalendar, label: "Schedule Class", action: () => {} },
+  { icon: FiMessageCircle, label: "Send Announcement", action: () => {} },
 ];
 
 const recentActivity = [
-  { title: 'CS101 Homework Due', time: '2h ago' },
-  { title: 'New Course Material', time: '5h ago' },
+  { title: "CS101 Homework Due", time: "2h ago" },
+  { title: "New Course Material", time: "5h ago" },
 ];
 
 const shortcuts = [
-  { key: '⌘K', action: 'Open Command Menu' },
-  { key: '⌘N', action: 'New Assignment' },
-  { key: '⌘S', action: 'Save Changes' },
+  { key: "⌘K", action: "Open Command Menu" },
+  { key: "⌘N", action: "New Assignment" },
+  { key: "⌘S", action: "Save Changes" },
 ];
 
 interface SidebarProps {
@@ -71,45 +70,41 @@ interface SidebarProps {
 export function Sidebar({ isCollapsed, onCollapse }: SidebarProps) {
   const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [theme, setTheme] = useState<"light" | "dark">("light");
   const [showShortcuts, setShowShortcuts] = useState(false);
 
-  // Initialize component on client side
   useEffect(() => {
     setMounted(true);
-    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
+    const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
     if (savedTheme) {
       setTheme(savedTheme);
-      document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+      document.documentElement.classList.toggle("dark", savedTheme === "dark");
     }
   }, []);
 
-  // Handle theme change
   const toggleTheme = () => {
     if (!mounted) return;
-    
-    const newTheme = theme === 'light' ? 'dark' : 'light';
+
+    const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
-    document.documentElement.classList.toggle('dark', newTheme === 'dark');
+    localStorage.setItem("theme", newTheme);
+    document.documentElement.classList.toggle("dark", newTheme === "dark");
   };
 
-  // Keyboard shortcut handler
   useEffect(() => {
     if (!mounted) return;
 
     const handleKey = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
         setShowShortcuts((v) => !v);
       }
     };
 
-    document.addEventListener('keydown', handleKey);
-    return () => document.removeEventListener('keydown', handleKey);
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
   }, [mounted]);
 
-  // Don't render anything until mounted to prevent hydration mismatch
   if (!mounted) {
     return null;
   }
@@ -120,7 +115,7 @@ export function Sidebar({ isCollapsed, onCollapse }: SidebarProps) {
         fixed inset-y-0 left-0 z-50 bg-white
         border-r border-gray-200
         transition-all duration-300 ease-in-out
-        ${isCollapsed ? 'w-16' : 'w-64'}
+        ${isCollapsed ? "w-16" : "w-64"}
       `}
     >
       <div className="flex flex-col h-full">
@@ -136,7 +131,7 @@ export function Sidebar({ isCollapsed, onCollapse }: SidebarProps) {
             size="sm"
             onClick={() => onCollapse(!isCollapsed)}
             className="p-1.5"
-            aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+            aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
           >
             {isCollapsed ? (
               <FiChevronsRight className="w-5 h-5 text-gray-500" />
@@ -182,19 +177,17 @@ export function Sidebar({ isCollapsed, onCollapse }: SidebarProps) {
                 href={item.path}
                 className={`
                   flex items-center transition-all duration-200 ${
-                    isCollapsed ? 'justify-center px-2' : 'px-4'
+                    isCollapsed ? "justify-center px-2" : "px-4"
                   } py-2.5 text-sm font-medium rounded-lg mx-2 ${
-                    isActive
-                      ? 'bg-blue-50 text-blue-700 shadow-sm'
-                      : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
-                  }
+                  isActive
+                    ? "bg-blue-50 text-blue-700 shadow-sm"
+                    : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                }
                 `}
               >
                 <item.Icon
                   className={`w-5 h-5 ${
-                    isActive
-                      ? 'text-blue-600'
-                      : 'text-gray-400'
+                    isActive ? "text-blue-600" : "text-gray-400"
                   }`}
                 />
                 {!isCollapsed && (
@@ -244,9 +237,11 @@ export function Sidebar({ isCollapsed, onCollapse }: SidebarProps) {
             <button
               onClick={toggleTheme}
               className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors"
-              aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}
+              aria-label={`Switch to ${
+                theme === "light" ? "dark" : "light"
+              } theme`}
             >
-              {theme === 'light' ? (
+              {theme === "light" ? (
                 <SunIcon className="w-5 h-5 text-yellow-500" />
               ) : (
                 <MoonIcon className="w-5 h-5 text-gray-400" />
