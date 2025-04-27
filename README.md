@@ -15,7 +15,7 @@ A modern web platform for managing courses, assignments, and student interaction
 
 - Next.js 14
 - TypeScript
-- Tailwind CSS
+- Tailwind CSS ...
 
 ## Quick Start
 
