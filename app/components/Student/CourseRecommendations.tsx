@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { FiBookOpen } from 'react-icons/fi';
+import { FiBook } from 'react-icons/fi';
 
 // Mock data - in a real app, this would come from an API
 const mockRecommendations = [
@@ -30,27 +30,20 @@ const mockRecommendations = [
 
 export default function CourseRecommendations() {
   return (
-    <div className="bg-white rounded-lg shadow p-6">
+    <div className="bg-white rounded-lg shadow p-4">
       <div className="flex items-center gap-2 mb-4">
-        <FiBookOpen className="w-5 h-5 text-purple-600" />
-        <h2 className="text-xl font-semibold">Recommended Courses</h2>
+        <FiBook className="w-5 h-5 text-blue-600" />
+        <h2 className="text-lg font-semibold">Recommended Courses</h2>
       </div>
-      
-      <div className="space-y-4">
-        {mockRecommendations.map((course) => (
-          <div key={course.id} className="border rounded-lg p-4">
-            <div className="flex justify-between items-start mb-2">
-              <h3 className="font-medium">{course.name}</h3>
-              <span className="text-sm font-medium text-purple-600">
-                {course.matchScore}% Match
-              </span>
-            </div>
-            <p className="text-sm text-gray-600 mb-2">{course.description}</p>
-            <div className="text-xs text-gray-500">
-              Prerequisites: {course.prerequisites.join(', ')}
-            </div>
-          </div>
-        ))}
+      <div className="space-y-3">
+        <div className="p-3 border rounded-lg">
+          <h3 className="font-medium">Data Structures</h3>
+          <p className="text-sm text-gray-600">CS 201 • 3 Credits</p>
+        </div>
+        <div className="p-3 border rounded-lg">
+          <h3 className="font-medium">Web Development</h3>
+          <p className="text-sm text-gray-600">CS 301 • 4 Credits</p>
+        </div>
       </div>
     </div>
   );
