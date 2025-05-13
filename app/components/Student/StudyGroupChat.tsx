@@ -3,8 +3,22 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { FiMessageSquare, FiPaperclip, FiSend, FiThumbsUp, FiStar } from 'react-icons/fi';
 
+interface Message {
+  id: number;
+  sender: string;
+  content: string;
+  timestamp: string;
+  attachments?: {
+    name: string;
+    type: string;
+    size: string;
+  }[];
+  likes: number;
+  isStarred?: boolean;
+}
+
 // Mock data - in a real app, this would come from an API
-const mockMessages = [
+const mockMessages: Message[] = [
   {
     id: 1,
     sender: 'Sarah Johnson',
