@@ -43,10 +43,13 @@ export default function ProgressAnalytics() {
   const currentSemester = mockSemesterData.find(s => s.semester === selectedSemester);
 
   const calculateGPAChange = () => {
-    const currentIndex = mockSemesterData.findIndex(s => s.semester === selectedSemester);
-    if (currentIndex === 0) return 0;
-    const previousGPA = mockSemesterData[currentIndex - 1].gpa;
-    return ((currentSemester?.gpa || 0) - previousGPA).toFixed(2);
+    const currentSemester = mockSemesterData.find(s => s.semester === selectedSemester);
+    const previousSemester = mockSemesterData.find(s => s.semester === 'Fall 2023');
+    
+    if (!currentSemester || !previousSemester) return '0.00';
+    
+    const change = (currentSemester.gpa - previousSemester.gpa).toFixed(2);
+    return change;
   };
 
   const gpaChange = calculateGPAChange();
