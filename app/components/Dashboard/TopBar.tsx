@@ -1,28 +1,31 @@
-'use client'
+"use client";
 
-import React, { useState, useEffect } from 'react'
-import { FiBell, FiSearch } from 'react-icons/fi'
-import { format } from 'date-fns'
-import { AcademicCalendar } from './AcademicCalendar'
+import React, { useState, useEffect } from "react";
+import { FiBell, FiSearch, FiShield } from "react-icons/fi";
+import { format } from "date-fns";
+import { AcademicCalendar } from "./AcademicCalendar";
+import Link from "next/link";
 
 export const TopBar = () => {
-  const [mounted, setMounted] = useState(false)
-  const [formattedDate, setFormattedDate] = useState('')
+  const [mounted, setMounted] = useState(false);
+  const [formattedDate, setFormattedDate] = useState("");
 
   useEffect(() => {
-    setMounted(true)
-    setFormattedDate(format(new Date(), 'EEEE, MMMM do yyyy'))
-  }, [])
+    setMounted(true);
+    setFormattedDate(format(new Date(), "EEEE, MMMM do yyyy"));
+  }, []);
 
   if (!mounted) {
-    return null
+    return null;
   }
 
   return (
-    <div className='border-b px-4 mb-4 mt-2 pb-4 border-stone-200'>
+    <div className="border-b px-4 mb-4 mt-2 pb-4 border-stone-200">
       <div className="flex items-center justify-between">
         <div>
-          <span className="text-sm font-bold block">Welcome back, Dr. Johnson!</span>
+          <span className="text-sm font-bold block">
+            Welcome back, Dr. Johnson!
+          </span>
           <span className="text-xs block text-stone-500">{formattedDate}</span>
         </div>
 
@@ -36,7 +39,18 @@ export const TopBar = () => {
             <FiSearch className="absolute left-2 top-1/2 transform -translate-y-1/2 text-stone-400" />
           </div>
 
-          <button className="relative p-2 text-stone-600 hover:text-blue-600 transition-colors" suppressHydrationWarning>
+          <Link
+            href="/security"
+            className="flex items-center gap-2 px-3 py-1.5 text-sm text-stone-600 hover:text-blue-600 transition-colors rounded-lg hover:bg-blue-50"
+          >
+            <FiShield className="w-4 h-4" />
+            <span>Security</span>
+          </Link>
+
+          <button
+            className="relative p-2 text-stone-600 hover:text-blue-600 transition-colors"
+            suppressHydrationWarning
+          >
             <FiBell className="w-5 h-5" />
             <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
           </button>
@@ -45,5 +59,5 @@ export const TopBar = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
