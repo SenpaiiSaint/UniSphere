@@ -6,6 +6,7 @@ import { Grid } from './Grid'
 import { ClassSchedule } from './ClassSchedule'
 import { StudentPerformance } from './StudentPerformance'
 import { RecentAnnouncements } from './RecentAnnouncements'
+import { EnrollmentManagement } from '../Enrollment/EnrollmentManagement'
 
 export const Dashboard = () => {
   return (
@@ -22,6 +23,7 @@ export const Dashboard = () => {
           </div>
         </div>
         <StudentPerformance />
+        <EnrollmentManagement />
       </div>
     </div>
   )
