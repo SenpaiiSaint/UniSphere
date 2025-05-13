@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { FiBell, FiSearch, FiShield } from "react-icons/fi";
+import { FiBell, FiSearch, FiShield, FiUser } from "react-icons/fi";
 import { format } from "date-fns";
 import { AcademicCalendar } from "./AcademicCalendar";
 import Link from "next/link";
@@ -38,6 +38,14 @@ export const TopBar = () => {
             />
             <FiSearch className="absolute left-2 top-1/2 transform -translate-y-1/2 text-stone-400" />
           </div>
+
+          <Link
+            href="/student"
+            className="flex items-center gap-2 px-3 py-1.5 text-sm text-stone-600 hover:text-blue-600 transition-colors rounded-lg hover:bg-blue-50"
+          >
+            <FiUser className="w-4 h-4" />
+            <span>Student Portal</span>
+          </Link>
 
           <Link
             href="/security"
