@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { mockSettings } from '@/app/data/mockData';
-import { MainLayout } from '../components/Layout/MainLayout';
+import { useState, useEffect } from "react";
+import { mockSettings } from "@/app/data/mockData";
+import { MainLayout } from "../components/Layout/MainLayout";
 import {
   BellIcon,
   AcademicCapIcon,
@@ -22,13 +22,21 @@ import {
   CloudArrowUpIcon,
   CloudArrowDownIcon,
   TrashIcon,
-  InformationCircleIcon
-} from '@heroicons/react/24/outline';
+  InformationCircleIcon,
+} from "@heroicons/react/24/outline";
 
-type TabType = 'notifications' | 'grading' | 'appearance' | 'security' | 'language' | 'time' | 'profile' | 'data';
+type TabType =
+  | "notifications"
+  | "grading"
+  | "appearance"
+  | "security"
+  | "language"
+  | "time"
+  | "profile"
+  | "data";
 
 type NotificationType = {
-  type: 'success' | 'error' | 'info';
+  type: "success" | "error" | "info";
   message: string;
   id: number;
 };
@@ -38,13 +46,13 @@ type AppearanceSettingKey = keyof typeof mockSettings.appearance;
 
 export default function SettingsPage() {
   const [settings, setSettings] = useState(mockSettings);
-  const [activeTab, setActiveTab] = useState<TabType>('notifications');
+  const [activeTab, setActiveTab] = useState<TabType>("notifications");
   const [isSaving, setIsSaving] = useState(false);
   const [notifications, setNotifications] = useState<NotificationType[]>([]);
   const [showPassword, setShowPassword] = useState(false);
-  const [currentPassword, setCurrentPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [showPasswordChangeForm, setShowPasswordChangeForm] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -56,41 +64,49 @@ export default function SettingsPage() {
     return () => clearTimeout(timer);
   }, []);
 
-  const addNotification = (type: NotificationType['type'], message: string) => {
+  const addNotification = (type: NotificationType["type"], message: string) => {
     const id = Date.now();
-    setNotifications(prev => [...prev, { type, message, id }]);
+    setNotifications((prev) => [...prev, { type, message, id }]);
     setTimeout(() => {
-      setNotifications(prev => prev.filter(n => n.id !== id));
+      setNotifications((prev) => prev.filter((n) => n.id !== id));
     }, 5000);
   };
 
-  const handleNotificationChange = (key: keyof typeof settings.notifications) => {
-    setSettings(prev => ({
+  const handleNotificationChange = (
+    key: keyof typeof settings.notifications
+  ) => {
+    setSettings((prev) => ({
       ...prev,
       notifications: {
         ...prev.notifications,
-        [key]: !prev.notifications[key]
-      }
+        [key]: !prev.notifications[key],
+      },
     }));
   };
 
-  const handleGradingChange = (key: GradingSettingKey, value: number | string | Record<string, number>) => {
-    setSettings(prev => ({
+  const handleGradingChange = (
+    key: GradingSettingKey,
+    value: number | string | Record<string, number>
+  ) => {
+    setSettings((prev) => ({
       ...prev,
       grading: {
         ...prev.grading,
-        [key]: value
-      }
+        [key]: value,
+      },
     }));
   };
 
-  const handleAppearanceChange = (key: AppearanceSettingKey, value: string | number) => {
-    setSettings(prev => ({
+  const handleAppearanceChange = (
+    key: AppearanceSettingKey,
+    value: string | number
+  ) => {
+    setSettings((prev) => ({
       ...prev,
       appearance: {
         ...prev.appearance,
-        [key]: value
-      }
+        [key]: value,
+      },
     }));
   };
 
@@ -99,17 +115,17 @@ export default function SettingsPage() {
     // Simulate API call
     setTimeout(() => {
       setIsSaving(false);
-      addNotification('success', 'Settings saved successfully');
+      addNotification("success", "Settings saved successfully");
     }, 1000);
   };
 
   const handlePasswordChange = () => {
     if (newPassword !== confirmPassword) {
-      addNotification('error', 'Passwords do not match');
+      addNotification("error", "Passwords do not match");
       return;
     }
     if (newPassword.length < 8) {
-      addNotification('error', 'Password must be at least 8 characters long');
+      addNotification("error", "Password must be at least 8 characters long");
       return;
     }
     setIsSaving(true);
@@ -117,33 +133,37 @@ export default function SettingsPage() {
     setTimeout(() => {
       setIsSaving(false);
       setShowPasswordChangeForm(false);
-      setCurrentPassword('');
-      setNewPassword('');
-      setConfirmPassword('');
-      addNotification('success', 'Password updated successfully');
+      setCurrentPassword("");
+      setNewPassword("");
+      setConfirmPassword("");
+      addNotification("success", "Password updated successfully");
     }, 1000);
   };
 
   const handleDeleteAccount = () => {
-    if (window.confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+    if (
+      window.confirm(
+        "Are you sure you want to delete your account? This action cannot be undone."
+      )
+    ) {
       setIsSaving(true);
       // Simulate API call
       setTimeout(() => {
         setIsSaving(false);
-        addNotification('info', 'Account deletion request submitted');
+        addNotification("info", "Account deletion request submitted");
       }, 1000);
     }
   };
 
   const tabs = [
-    { id: 'profile', label: 'Profile', icon: UserIcon },
-    { id: 'notifications', label: 'Notifications', icon: BellIcon },
-    { id: 'grading', label: 'Grading', icon: AcademicCapIcon },
-    { id: 'appearance', label: 'Appearance', icon: PaintBrushIcon },
-    { id: 'security', label: 'Security', icon: ShieldCheckIcon },
-    { id: 'language', label: 'Language', icon: LanguageIcon },
-    { id: 'time', label: 'Time & Date', icon: ClockIcon },
-    { id: 'data', label: 'Data Management', icon: DocumentTextIcon }
+    { id: "profile", label: "Profile", icon: UserIcon },
+    { id: "notifications", label: "Notifications", icon: BellIcon },
+    { id: "grading", label: "Grading", icon: AcademicCapIcon },
+    { id: "appearance", label: "Appearance", icon: PaintBrushIcon },
+    { id: "security", label: "Security", icon: ShieldCheckIcon },
+    { id: "language", label: "Language", icon: LanguageIcon },
+    { id: "time", label: "Time & Date", icon: ClockIcon },
+    { id: "data", label: "Data Management", icon: DocumentTextIcon },
   ];
 
   return (
@@ -155,16 +175,16 @@ export default function SettingsPage() {
             <div
               key={id}
               className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
-                type === 'success'
-                  ? 'bg-green-100 text-green-800'
-                  : type === 'error'
-                  ? 'bg-red-100 text-red-800'
-                  : 'bg-blue-100 text-blue-800'
+                type === "success"
+                  ? "bg-green-100 text-green-800"
+                  : type === "error"
+                  ? "bg-red-100 text-red-800"
+                  : "bg-blue-100 text-blue-800"
               }`}
             >
-              {type === 'success' ? (
+              {type === "success" ? (
                 <CheckIcon className="h-5 w-5" />
-              ) : type === 'error' ? (
+              ) : type === "error" ? (
                 <XMarkIcon className="h-5 w-5" />
               ) : (
                 <InformationCircleIcon className="h-5 w-5" />
@@ -181,7 +201,9 @@ export default function SettingsPage() {
                 <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2 truncate bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
                   Settings
                 </h1>
-                <p className="text-gray-500 text-sm sm:text-base truncate">Manage your account preferences and settings</p>
+                <p className="text-gray-500 text-sm sm:text-base truncate">
+                  Manage your account preferences and settings
+                </p>
               </div>
               <div className="flex items-center gap-4">
                 <button
@@ -217,10 +239,12 @@ export default function SettingsPage() {
                 <div className="lg:col-span-1">
                   <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                     <div className="p-4 border-b border-gray-100 bg-gradient-to-r from-blue-50 to-purple-50">
-                      <h2 className="text-lg font-semibold text-gray-900">Settings Menu</h2>
+                      <h2 className="text-lg font-semibold text-gray-900">
+                        Settings Menu
+                      </h2>
                     </div>
                     <div className="divide-y divide-gray-100">
-                      {tabs.map(tab => {
+                      {tabs.map((tab) => {
                         const Icon = tab.icon;
                         return (
                           <button
@@ -228,8 +252,8 @@ export default function SettingsPage() {
                             onClick={() => setActiveTab(tab.id as TabType)}
                             className={`w-full flex items-center gap-3 p-4 text-sm font-medium transition-colors duration-200 ${
                               activeTab === tab.id
-                                ? 'bg-blue-50 text-blue-600'
-                                : 'text-gray-600 hover:bg-gray-50'
+                                ? "bg-blue-50 text-blue-600"
+                                : "text-gray-600 hover:bg-gray-50"
                             }`}
                           >
                             <Icon className="h-5 w-5" />
@@ -246,15 +270,21 @@ export default function SettingsPage() {
                   <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                     <div className="p-6">
                       {/* Profile Tab */}
-                      {activeTab === 'profile' && (
+                      {activeTab === "profile" && (
                         <div className="space-y-6">
-                          <h3 className="text-lg font-semibold text-gray-900">Profile Settings</h3>
+                          <h3 className="text-lg font-semibold text-gray-900">
+                            Profile Settings
+                          </h3>
                           <div className="space-y-6">
                             <div className="p-4 bg-gray-50 rounded-xl">
-                              <h4 className="text-sm font-medium text-gray-900 mb-4">Personal Information</h4>
+                              <h4 className="text-sm font-medium text-gray-900 mb-4">
+                                Personal Information
+                              </h4>
                               <div className="space-y-4">
                                 <div>
-                                  <label className="block text-sm font-medium text-gray-700 mb-1">Display Name</label>
+                                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Display Name
+                                  </label>
                                   <input
                                     type="text"
                                     className="w-full rounded-xl border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm bg-white/80 backdrop-blur-sm py-2.5 px-4 transition-all duration-200 focus:ring-2 focus:ring-blue-200"
@@ -262,7 +292,9 @@ export default function SettingsPage() {
                                   />
                                 </div>
                                 <div>
-                                  <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Email Address
+                                  </label>
                                   <input
                                     type="email"
                                     className="w-full rounded-xl border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm bg-white/80 backdrop-blur-sm py-2.5 px-4 transition-all duration-200 focus:ring-2 focus:ring-blue-200"
@@ -270,7 +302,9 @@ export default function SettingsPage() {
                                   />
                                 </div>
                                 <div>
-                                  <label className="block text-sm font-medium text-gray-700 mb-1">Bio</label>
+                                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Bio
+                                  </label>
                                   <textarea
                                     className="w-full rounded-xl border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm bg-white/80 backdrop-blur-sm py-2.5 px-4 transition-all duration-200 focus:ring-2 focus:ring-blue-200 min-h-[100px]"
                                     placeholder="Tell us about yourself"
@@ -280,7 +314,9 @@ export default function SettingsPage() {
                             </div>
 
                             <div className="p-4 bg-gray-50 rounded-xl">
-                              <h4 className="text-sm font-medium text-gray-900 mb-4">Profile Picture</h4>
+                              <h4 className="text-sm font-medium text-gray-900 mb-4">
+                                Profile Picture
+                              </h4>
                               <div className="flex items-center gap-4">
                                 <div className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
                                   <UserIcon className="h-10 w-10 text-gray-400" />
@@ -290,7 +326,9 @@ export default function SettingsPage() {
                                     <CloudArrowUpIcon className="h-5 w-5" />
                                     Upload New Photo
                                   </button>
-                                  <p className="mt-2 text-xs text-gray-500">JPG, GIF or PNG. Max size of 2MB</p>
+                                  <p className="mt-2 text-xs text-gray-500">
+                                    JPG, GIF or PNG. Max size of 2MB
+                                  </p>
                                 </div>
                               </div>
                             </div>
@@ -299,50 +337,71 @@ export default function SettingsPage() {
                       )}
 
                       {/* Notifications Tab */}
-                      {activeTab === 'notifications' && (
+                      {activeTab === "notifications" && (
                         <div className="space-y-6">
-                          <h3 className="text-lg font-semibold text-gray-900">Notification Preferences</h3>
+                          <h3 className="text-lg font-semibold text-gray-900">
+                            Notification Preferences
+                          </h3>
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            {Object.entries(settings.notifications).map(([key, value]) => (
-                              <div
-                                key={key}
-                                className="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors duration-200"
-                              >
-                                <div className="flex items-center gap-3">
-                                  <BellIcon className="h-5 w-5 text-gray-400" />
-                                  <div>
-                                    <h4 className="text-sm font-medium text-gray-900">
-                                      {key.charAt(0).toUpperCase() + key.slice(1)} Notifications
-                                    </h4>
-                                    <p className="text-xs text-gray-500">Receive alerts for {key} updates</p>
+                            {Object.entries(settings.notifications).map(
+                              ([key, value]) => (
+                                <div
+                                  key={key}
+                                  className="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors duration-200"
+                                >
+                                  <div className="flex items-center gap-3">
+                                    <BellIcon className="h-5 w-5 text-gray-400" />
+                                    <div>
+                                      <h4 className="text-sm font-medium text-gray-900">
+                                        {key.charAt(0).toUpperCase() +
+                                          key.slice(1)}{" "}
+                                        Notifications
+                                      </h4>
+                                      <p className="text-xs text-gray-500">
+                                        Receive alerts for {key} updates
+                                      </p>
+                                    </div>
                                   </div>
+                                  <label className="relative inline-flex items-center cursor-pointer">
+                                    <input
+                                      type="checkbox"
+                                      checked={value}
+                                      onChange={() =>
+                                        handleNotificationChange(
+                                          key as keyof typeof settings.notifications
+                                        )
+                                      }
+                                      className="sr-only peer"
+                                    />
+                                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                                  </label>
                                 </div>
-                                <label className="relative inline-flex items-center cursor-pointer">
-                                  <input
-                                    type="checkbox"
-                                    checked={value}
-                                    onChange={() => handleNotificationChange(key as keyof typeof settings.notifications)}
-                                    className="sr-only peer"
-                                  />
-                                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-                                </label>
-                              </div>
-                            ))}
+                              )
+                            )}
                           </div>
                         </div>
                       )}
 
                       {/* Grading Tab */}
-                      {activeTab === 'grading' && (
+                      {activeTab === "grading" && (
                         <div className="space-y-6">
-                          <h3 className="text-lg font-semibold text-gray-900">Grading Settings</h3>
+                          <h3 className="text-lg font-semibold text-gray-900">
+                            Grading Settings
+                          </h3>
                           <div className="space-y-6">
                             <div className="p-4 bg-gray-50 rounded-xl">
-                              <label className="block text-sm font-medium text-gray-700 mb-2">Late Penalty (%)</label>
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Late Penalty (%)
+                              </label>
                               <input
                                 type="number"
                                 value={settings.grading.latePenalty}
-                                onChange={(e) => handleGradingChange('latePenalty', parseInt(e.target.value))}
+                                onChange={(e) =>
+                                  handleGradingChange(
+                                    "latePenalty",
+                                    parseInt(e.target.value)
+                                  )
+                                }
                                 className="w-full rounded-xl border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm bg-white/80 backdrop-blur-sm py-2.5 px-4 transition-all duration-200 focus:ring-2 focus:ring-blue-200"
                                 min="0"
                                 max="100"
@@ -350,37 +409,64 @@ export default function SettingsPage() {
                             </div>
 
                             <div className="p-4 bg-gray-50 rounded-xl">
-                              <label className="block text-sm font-medium text-gray-700 mb-2">Grade Rounding</label>
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Grade Rounding
+                              </label>
                               <select
                                 value={settings.grading.rounding}
-                                onChange={(e) => handleGradingChange('rounding', e.target.value)}
+                                onChange={(e) =>
+                                  handleGradingChange(
+                                    "rounding",
+                                    e.target.value
+                                  )
+                                }
                                 className="w-full rounded-xl border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm bg-white/80 backdrop-blur-sm py-2.5 px-4 transition-all duration-200 focus:ring-2 focus:ring-blue-200"
                               >
                                 <option value="up">Round Up</option>
                                 <option value="down">Round Down</option>
-                                <option value="nearest">Round to Nearest</option>
+                                <option value="nearest">
+                                  Round to Nearest
+                                </option>
                               </select>
                             </div>
 
                             <div className="p-4 bg-gray-50 rounded-xl">
-                              <label className="block text-sm font-medium text-gray-700 mb-2">Grade Scale</label>
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Grade Scale
+                              </label>
                               <div className="space-y-3">
-                                {Object.entries(settings.grading.gradeScale).map(([grade, cutoff]) => (
-                                  <div key={grade} className="flex items-center gap-4">
-                                    <span className="w-8 text-sm font-medium text-gray-900">{grade}:</span>
+                                {Object.entries(
+                                  settings.grading.gradeScale
+                                ).map(([grade, cutoff]) => (
+                                  <div
+                                    key={grade}
+                                    className="flex items-center gap-4"
+                                  >
+                                    <span className="w-8 text-sm font-medium text-gray-900">
+                                      {grade}:
+                                    </span>
                                     <input
                                       type="number"
                                       value={cutoff}
                                       onChange={(e) => {
-                                        const newScale = { ...settings.grading.gradeScale };
-                                        newScale[grade] = parseInt(e.target.value);
-                                        handleGradingChange('gradeScale', newScale);
+                                        const newScale = {
+                                          ...settings.grading.gradeScale,
+                                        };
+                                        newScale[grade] = parseInt(
+                                          e.target.value
+                                        );
+                                        handleGradingChange(
+                                          "gradeScale",
+                                          newScale
+                                        );
                                       }}
                                       className="w-24 rounded-xl border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm bg-white/80 backdrop-blur-sm py-2 px-3 transition-all duration-200 focus:ring-2 focus:ring-blue-200"
                                       min="0"
                                       max="100"
                                     />
-                                    <span className="text-sm text-gray-500">% and above</span>
+                                    <span className="text-sm text-gray-500">
+                                      % and above
+                                    </span>
                                   </div>
                                 ))}
                               </div>
@@ -390,15 +476,24 @@ export default function SettingsPage() {
                       )}
 
                       {/* Appearance Tab */}
-                      {activeTab === 'appearance' && (
+                      {activeTab === "appearance" && (
                         <div className="space-y-6">
-                          <h3 className="text-lg font-semibold text-gray-900">Appearance Settings</h3>
+                          <h3 className="text-lg font-semibold text-gray-900">
+                            Appearance Settings
+                          </h3>
                           <div className="space-y-6">
                             <div className="p-4 bg-gray-50 rounded-xl">
-                              <label className="block text-sm font-medium text-gray-700 mb-2">Theme</label>
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Theme
+                              </label>
                               <select
                                 value={settings.appearance.theme}
-                                onChange={(e) => handleAppearanceChange('theme', e.target.value)}
+                                onChange={(e) =>
+                                  handleAppearanceChange(
+                                    "theme",
+                                    e.target.value
+                                  )
+                                }
                                 className="w-full rounded-xl border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm bg-white/80 backdrop-blur-sm py-2.5 px-4 transition-all duration-200 focus:ring-2 focus:ring-blue-200"
                               >
                                 <option value="light">Light</option>
@@ -408,25 +503,41 @@ export default function SettingsPage() {
                             </div>
 
                             <div className="p-4 bg-gray-50 rounded-xl">
-                              <label className="block text-sm font-medium text-gray-700 mb-2">Font Size</label>
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Font Size
+                              </label>
                               <div className="flex items-center gap-4">
                                 <input
                                   type="range"
                                   value={settings.appearance.fontSize}
-                                  onChange={(e) => handleAppearanceChange('fontSize', parseInt(e.target.value))}
+                                  onChange={(e) =>
+                                    handleAppearanceChange(
+                                      "fontSize",
+                                      parseInt(e.target.value)
+                                    )
+                                  }
                                   className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
                                   min="12"
                                   max="24"
                                 />
-                                <span className="text-sm text-gray-500 w-12 text-center">{settings.appearance.fontSize}px</span>
+                                <span className="text-sm text-gray-500 w-12 text-center">
+                                  {settings.appearance.fontSize}px
+                                </span>
                               </div>
                             </div>
 
                             <div className="p-4 bg-gray-50 rounded-xl">
-                              <label className="block text-sm font-medium text-gray-700 mb-2">Density</label>
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Density
+                              </label>
                               <select
                                 value={settings.appearance.density}
-                                onChange={(e) => handleAppearanceChange('density', e.target.value)}
+                                onChange={(e) =>
+                                  handleAppearanceChange(
+                                    "density",
+                                    e.target.value
+                                  )
+                                }
                                 className="w-full rounded-xl border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm bg-white/80 backdrop-blur-sm py-2.5 px-4 transition-all duration-200 focus:ring-2 focus:ring-blue-200"
                               >
                                 <option value="comfortable">Comfortable</option>
@@ -438,28 +549,42 @@ export default function SettingsPage() {
                       )}
 
                       {/* Security Tab - Enhanced */}
-                      {activeTab === 'security' && (
+                      {activeTab === "security" && (
                         <div className="space-y-6">
-                          <h3 className="text-lg font-semibold text-gray-900">Security Settings</h3>
+                          <h3 className="text-lg font-semibold text-gray-900">
+                            Security Settings
+                          </h3>
                           <div className="space-y-6">
                             <div className="p-4 bg-gray-50 rounded-xl">
-                              <h4 className="text-sm font-medium text-gray-900 mb-2">Two-Factor Authentication</h4>
-                              <p className="text-sm text-gray-500 mb-4">Add an extra layer of security to your account</p>
+                              <h4 className="text-sm font-medium text-gray-900 mb-2">
+                                Two-Factor Authentication
+                              </h4>
+                              <p className="text-sm text-gray-500 mb-4">
+                                Add an extra layer of security to your account
+                              </p>
                               <div className="flex items-center gap-4">
                                 <button className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200">
                                   <ShieldCheckIcon className="h-5 w-5" />
                                   Enable 2FA
                                 </button>
-                                <span className="text-sm text-gray-500">Currently disabled</span>
+                                <span className="text-sm text-gray-500">
+                                  Currently disabled
+                                </span>
                               </div>
                             </div>
 
                             <div className="p-4 bg-gray-50 rounded-xl">
-                              <h4 className="text-sm font-medium text-gray-900 mb-2">Password</h4>
-                              <p className="text-sm text-gray-500 mb-4">Change your account password</p>
+                              <h4 className="text-sm font-medium text-gray-900 mb-2">
+                                Password
+                              </h4>
+                              <p className="text-sm text-gray-500 mb-4">
+                                Change your account password
+                              </p>
                               {!showPasswordChangeForm ? (
                                 <button
-                                  onClick={() => setShowPasswordChangeForm(true)}
+                                  onClick={() =>
+                                    setShowPasswordChangeForm(true)
+                                  }
                                   className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all duration-200"
                                 >
                                   Change Password
@@ -467,37 +592,57 @@ export default function SettingsPage() {
                               ) : (
                                 <div className="space-y-4">
                                   <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">Current Password</label>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                                      Current Password
+                                    </label>
                                     <div className="relative">
                                       <input
-                                        type={showPassword ? "text" : "password"}
+                                        type={
+                                          showPassword ? "text" : "password"
+                                        }
                                         value={currentPassword}
-                                        onChange={(e) => setCurrentPassword(e.target.value)}
+                                        onChange={(e) =>
+                                          setCurrentPassword(e.target.value)
+                                        }
                                         className="w-full rounded-xl border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm bg-white/80 backdrop-blur-sm py-2.5 px-4 pr-10 transition-all duration-200 focus:ring-2 focus:ring-blue-200"
                                       />
                                       <button
-                                        onClick={() => setShowPassword(!showPassword)}
+                                        onClick={() =>
+                                          setShowPassword(!showPassword)
+                                        }
                                         className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
                                       >
-                                        {showPassword ? <EyeSlashIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
+                                        {showPassword ? (
+                                          <EyeSlashIcon className="h-5 w-5" />
+                                        ) : (
+                                          <EyeIcon className="h-5 w-5" />
+                                        )}
                                       </button>
                                     </div>
                                   </div>
                                   <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">New Password</label>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                                      New Password
+                                    </label>
                                     <input
                                       type={showPassword ? "text" : "password"}
                                       value={newPassword}
-                                      onChange={(e) => setNewPassword(e.target.value)}
+                                      onChange={(e) =>
+                                        setNewPassword(e.target.value)
+                                      }
                                       className="w-full rounded-xl border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm bg-white/80 backdrop-blur-sm py-2.5 px-4 transition-all duration-200 focus:ring-2 focus:ring-blue-200"
                                     />
                                   </div>
                                   <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">Confirm New Password</label>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                                      Confirm New Password
+                                    </label>
                                     <input
                                       type={showPassword ? "text" : "password"}
                                       value={confirmPassword}
-                                      onChange={(e) => setConfirmPassword(e.target.value)}
+                                      onChange={(e) =>
+                                        setConfirmPassword(e.target.value)
+                                      }
                                       className="w-full rounded-xl border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm bg-white/80 backdrop-blur-sm py-2.5 px-4 transition-all duration-200 focus:ring-2 focus:ring-blue-200"
                                     />
                                   </div>
@@ -510,7 +655,9 @@ export default function SettingsPage() {
                                       Update Password
                                     </button>
                                     <button
-                                      onClick={() => setShowPasswordChangeForm(false)}
+                                      onClick={() =>
+                                        setShowPasswordChangeForm(false)
+                                      }
                                       className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all duration-200"
                                     >
                                       Cancel
@@ -521,8 +668,12 @@ export default function SettingsPage() {
                             </div>
 
                             <div className="p-4 bg-gray-50 rounded-xl">
-                              <h4 className="text-sm font-medium text-gray-900 mb-2">Active Sessions</h4>
-                              <p className="text-sm text-gray-500 mb-4">Manage your active sessions across devices</p>
+                              <h4 className="text-sm font-medium text-gray-900 mb-2">
+                                Active Sessions
+                              </h4>
+                              <p className="text-sm text-gray-500 mb-4">
+                                Manage your active sessions across devices
+                              </p>
                               <div className="space-y-4">
                                 <div className="flex items-center justify-between p-3 bg-white rounded-lg border border-gray-200">
                                   <div className="flex items-center gap-3">
@@ -530,8 +681,12 @@ export default function SettingsPage() {
                                       <ChartBarIcon className="h-5 w-5 text-blue-600" />
                                     </div>
                                     <div>
-                                      <p className="text-sm font-medium text-gray-900">Windows 10 - Chrome</p>
-                                      <p className="text-xs text-gray-500">Last active: 2 hours ago</p>
+                                      <p className="text-sm font-medium text-gray-900">
+                                        Windows 10 - Chrome
+                                      </p>
+                                      <p className="text-xs text-gray-500">
+                                        Last active: 2 hours ago
+                                      </p>
                                     </div>
                                   </div>
                                   <button className="text-gray-400 hover:text-red-500 transition-colors duration-200">
@@ -542,15 +697,22 @@ export default function SettingsPage() {
                             </div>
 
                             <div className="p-4 bg-gray-50 rounded-xl">
-                              <h4 className="text-sm font-medium text-gray-900 mb-2">Security Recommendations</h4>
+                              <h4 className="text-sm font-medium text-gray-900 mb-2">
+                                Security Recommendations
+                              </h4>
                               <div className="space-y-4">
                                 <div className="flex items-start gap-4 p-3 bg-white rounded-lg border border-gray-200">
                                   <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
                                     <ShieldCheckIcon className="h-5 w-5 text-blue-600" />
                                   </div>
                                   <div>
-                                    <p className="text-sm font-medium text-gray-900">Enable Two-Factor Authentication</p>
-                                    <p className="text-xs text-gray-500 mt-1">Add an extra layer of security to your account</p>
+                                    <p className="text-sm font-medium text-gray-900">
+                                      Enable Two-Factor Authentication
+                                    </p>
+                                    <p className="text-xs text-gray-500 mt-1">
+                                      Add an extra layer of security to your
+                                      account
+                                    </p>
                                   </div>
                                 </div>
                                 <div className="flex items-start gap-4 p-3 bg-white rounded-lg border border-gray-200">
@@ -558,8 +720,12 @@ export default function SettingsPage() {
                                     <KeyIcon className="h-5 w-5 text-green-600" />
                                   </div>
                                   <div>
-                                    <p className="text-sm font-medium text-gray-900">Update Password Regularly</p>
-                                    <p className="text-xs text-gray-500 mt-1">Change your password every 90 days</p>
+                                    <p className="text-sm font-medium text-gray-900">
+                                      Update Password Regularly
+                                    </p>
+                                    <p className="text-xs text-gray-500 mt-1">
+                                      Change your password every 90 days
+                                    </p>
                                   </div>
                                 </div>
                               </div>
@@ -569,11 +735,15 @@ export default function SettingsPage() {
                       )}
 
                       {/* Language Tab */}
-                      {activeTab === 'language' && (
+                      {activeTab === "language" && (
                         <div className="space-y-6">
-                          <h3 className="text-lg font-semibold text-gray-900">Language Settings</h3>
+                          <h3 className="text-lg font-semibold text-gray-900">
+                            Language Settings
+                          </h3>
                           <div className="p-4 bg-gray-50 rounded-xl">
-                            <label className="block text-sm font-medium text-gray-700 mb-2">Interface Language</label>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                              Interface Language
+                            </label>
                             <select className="w-full rounded-xl border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm bg-white/80 backdrop-blur-sm py-2.5 px-4 transition-all duration-200 focus:ring-2 focus:ring-blue-200">
                               <option value="en">English</option>
                               <option value="es">Spanish</option>
@@ -585,12 +755,16 @@ export default function SettingsPage() {
                       )}
 
                       {/* Time & Date Tab */}
-                      {activeTab === 'time' && (
+                      {activeTab === "time" && (
                         <div className="space-y-6">
-                          <h3 className="text-lg font-semibold text-gray-900">Time & Date Settings</h3>
+                          <h3 className="text-lg font-semibold text-gray-900">
+                            Time & Date Settings
+                          </h3>
                           <div className="space-y-6">
                             <div className="p-4 bg-gray-50 rounded-xl">
-                              <label className="block text-sm font-medium text-gray-700 mb-2">Time Zone</label>
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Time Zone
+                              </label>
                               <select className="w-full rounded-xl border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm bg-white/80 backdrop-blur-sm py-2.5 px-4 transition-all duration-200 focus:ring-2 focus:ring-blue-200">
                                 <option value="UTC">UTC</option>
                                 <option value="EST">Eastern Time (EST)</option>
@@ -600,7 +774,9 @@ export default function SettingsPage() {
                             </div>
 
                             <div className="p-4 bg-gray-50 rounded-xl">
-                              <label className="block text-sm font-medium text-gray-700 mb-2">Date Format</label>
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Date Format
+                              </label>
                               <select className="w-full rounded-xl border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm bg-white/80 backdrop-blur-sm py-2.5 px-4 transition-all duration-200 focus:ring-2 focus:ring-blue-200">
                                 <option value="MM/DD/YYYY">MM/DD/YYYY</option>
                                 <option value="DD/MM/YYYY">DD/MM/YYYY</option>
@@ -612,13 +788,19 @@ export default function SettingsPage() {
                       )}
 
                       {/* Data Management Tab */}
-                      {activeTab === 'data' && (
+                      {activeTab === "data" && (
                         <div className="space-y-6">
-                          <h3 className="text-lg font-semibold text-gray-900">Data Management</h3>
+                          <h3 className="text-lg font-semibold text-gray-900">
+                            Data Management
+                          </h3>
                           <div className="space-y-6">
                             <div className="p-4 bg-gray-50 rounded-xl">
-                              <h4 className="text-sm font-medium text-gray-900 mb-2">Export Data</h4>
-                              <p className="text-sm text-gray-500 mb-4">Download a copy of your data</p>
+                              <h4 className="text-sm font-medium text-gray-900 mb-2">
+                                Export Data
+                              </h4>
+                              <p className="text-sm text-gray-500 mb-4">
+                                Download a copy of your data
+                              </p>
                               <button className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all duration-200">
                                 <CloudArrowDownIcon className="h-5 w-5" />
                                 Export All Data
@@ -626,8 +808,12 @@ export default function SettingsPage() {
                             </div>
 
                             <div className="p-4 bg-gray-50 rounded-xl">
-                              <h4 className="text-sm font-medium text-gray-900 mb-2">Import Data</h4>
-                              <p className="text-sm text-gray-500 mb-4">Import your data from another source</p>
+                              <h4 className="text-sm font-medium text-gray-900 mb-2">
+                                Import Data
+                              </h4>
+                              <p className="text-sm text-gray-500 mb-4">
+                                Import your data from another source
+                              </p>
                               <button className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all duration-200">
                                 <CloudArrowUpIcon className="h-5 w-5" />
                                 Import Data
@@ -635,8 +821,13 @@ export default function SettingsPage() {
                             </div>
 
                             <div className="p-4 bg-gray-50 rounded-xl">
-                              <h4 className="text-sm font-medium text-gray-900 mb-2">Delete Account</h4>
-                              <p className="text-sm text-gray-500 mb-4">Permanently delete your account and all associated data</p>
+                              <h4 className="text-sm font-medium text-gray-900 mb-2">
+                                Delete Account
+                              </h4>
+                              <p className="text-sm text-gray-500 mb-4">
+                                Permanently delete your account and all
+                                associated data
+                              </p>
                               <button
                                 onClick={handleDeleteAccount}
                                 className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-red-100 text-red-700 text-sm font-medium hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all duration-200"
@@ -647,28 +838,45 @@ export default function SettingsPage() {
                             </div>
 
                             <div className="p-4 bg-gray-50 rounded-xl">
-                              <h4 className="text-sm font-medium text-gray-900 mb-2">Data Usage</h4>
+                              <h4 className="text-sm font-medium text-gray-900 mb-2">
+                                Data Usage
+                              </h4>
                               <div className="space-y-4">
                                 <div className="flex items-center justify-between">
-                                  <span className="text-sm text-gray-600">Storage Used</span>
-                                  <span className="text-sm font-medium text-gray-900">2.5 GB / 10 GB</span>
+                                  <span className="text-sm text-gray-600">
+                                    Storage Used
+                                  </span>
+                                  <span className="text-sm font-medium text-gray-900">
+                                    2.5 GB / 10 GB
+                                  </span>
                                 </div>
                                 <div className="w-full bg-gray-200 rounded-full h-2">
-                                  <div className="bg-blue-600 h-2 rounded-full" style={{ width: '25%' }}></div>
+                                  <div
+                                    className="bg-blue-600 h-2 rounded-full"
+                                    style={{ width: "25%" }}
+                                  ></div>
                                 </div>
-                                <p className="text-xs text-gray-500">You have 7.5 GB of storage remaining</p>
+                                <p className="text-xs text-gray-500">
+                                  You have 7.5 GB of storage remaining
+                                </p>
                               </div>
                             </div>
 
                             <div className="p-4 bg-gray-50 rounded-xl">
-                              <h4 className="text-sm font-medium text-gray-900 mb-2">Data Export History</h4>
+                              <h4 className="text-sm font-medium text-gray-900 mb-2">
+                                Data Export History
+                              </h4>
                               <div className="space-y-3">
                                 <div className="flex items-center justify-between p-3 bg-white rounded-lg border border-gray-200">
                                   <div className="flex items-center gap-3">
                                     <CloudArrowDownIcon className="h-5 w-5 text-gray-400" />
                                     <div>
-                                      <p className="text-sm font-medium text-gray-900">Full Data Export</p>
-                                      <p className="text-xs text-gray-500">Completed 2 days ago</p>
+                                      <p className="text-sm font-medium text-gray-900">
+                                        Full Data Export
+                                      </p>
+                                      <p className="text-xs text-gray-500">
+                                        Completed 2 days ago
+                                      </p>
                                     </div>
                                   </div>
                                   <button className="text-blue-600 hover:text-blue-700 text-sm font-medium">
@@ -690,4 +898,4 @@ export default function SettingsPage() {
       </div>
     </MainLayout>
   );
-} 
+}

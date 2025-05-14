@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { FiTrendingUp } from 'react-icons/fi';
+import React from "react";
+import { FiTrendingUp } from "react-icons/fi";
 
 export default function AcademicProgress() {
   return (
@@ -26,4 +26,4 @@ export default function AcademicProgress() {
       </div>
     </div>
   );
-} 
+}

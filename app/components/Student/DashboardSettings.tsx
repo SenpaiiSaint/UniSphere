@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { FiSettings, FiEye, FiEyeOff } from 'react-icons/fi';
+import React, { useState, useEffect } from "react";
+import { FiSettings, FiEye, FiEyeOff } from "react-icons/fi";
 
 interface Widget {
   id: string;
@@ -10,30 +10,39 @@ interface Widget {
 }
 
 const widgets: Widget[] = [
-  { id: 'quickActions', title: 'Quick Actions', defaultVisible: true },
-  { id: 'currentCourses', title: 'Current Courses', defaultVisible: true },
-  { id: 'upcomingEvents', title: 'Upcoming Events', defaultVisible: true },
-  { id: 'alerts', title: 'Important Alerts', defaultVisible: true },
-  { id: 'courseRecommendations', title: 'Course Recommendations', defaultVisible: true },
-  { id: 'academicProgress', title: 'Academic Progress', defaultVisible: true },
-  { id: 'supportTickets', title: 'Support Tickets', defaultVisible: true },
+  { id: "quickActions", title: "Quick Actions", defaultVisible: true },
+  { id: "currentCourses", title: "Current Courses", defaultVisible: true },
+  { id: "upcomingEvents", title: "Upcoming Events", defaultVisible: true },
+  { id: "alerts", title: "Important Alerts", defaultVisible: true },
+  {
+    id: "courseRecommendations",
+    title: "Course Recommendations",
+    defaultVisible: true,
+  },
+  { id: "academicProgress", title: "Academic Progress", defaultVisible: true },
+  { id: "supportTickets", title: "Support Tickets", defaultVisible: true },
 ];
 
 export default function DashboardSettings() {
   const [isOpen, setIsOpen] = useState(false);
-  const [visibleWidgets, setVisibleWidgets] = useState<Record<string, boolean>>({});
+  const [visibleWidgets, setVisibleWidgets] = useState<Record<string, boolean>>(
+    {}
+  );
 
   useEffect(() => {
     // Load saved preferences from localStorage
-    const savedPreferences = localStorage.getItem('dashboardPreferences');
+    const savedPreferences = localStorage.getItem("dashboardPreferences");
     if (savedPreferences) {
       setVisibleWidgets(JSON.parse(savedPreferences));
     } else {
       // Set default visibility
-      const defaultVisibility = widgets.reduce((acc, widget) => ({
-        ...acc,
-        [widget.id]: widget.defaultVisible
-      }), {});
+      const defaultVisibility = widgets.reduce(
+        (acc, widget) => ({
+          ...acc,
+          [widget.id]: widget.defaultVisible,
+        }),
+        {}
+      );
       setVisibleWidgets(defaultVisibility);
     }
   }, []);
@@ -41,10 +50,10 @@ export default function DashboardSettings() {
   const toggleWidget = (widgetId: string) => {
     const newVisibility = {
       ...visibleWidgets,
-      [widgetId]: !visibleWidgets[widgetId]
+      [widgetId]: !visibleWidgets[widgetId],
     };
     setVisibleWidgets(newVisibility);
-    localStorage.setItem('dashboardPreferences', JSON.stringify(newVisibility));
+    localStorage.setItem("dashboardPreferences", JSON.stringify(newVisibility));
   };
 
   return (
@@ -84,4 +93,4 @@ export default function DashboardSettings() {
       )}
     </div>
   );
-} 
+}

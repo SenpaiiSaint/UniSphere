@@ -1,23 +1,66 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { FiBook, FiTrendingUp, FiCalendar, FiAlertCircle } from 'react-icons/fi';
+import React from "react";
+import {
+  FiBook,
+  FiTrendingUp,
+  FiCalendar,
+  FiAlertCircle,
+} from "react-icons/fi";
 
 // Mock data - in a real app, this would come from an API
 const mockData = {
   currentCourses: [
-    { id: 1, name: 'Introduction to Computer Science', progress: 75, nextAssignment: 'Final Project' },
-    { id: 2, name: 'Data Structures', progress: 60, nextAssignment: 'Midterm Exam' },
-    { id: 3, name: 'Web Development', progress: 90, nextAssignment: 'Group Project' },
+    {
+      id: 1,
+      name: "Introduction to Computer Science",
+      progress: 75,
+      nextAssignment: "Final Project",
+    },
+    {
+      id: 2,
+      name: "Data Structures",
+      progress: 60,
+      nextAssignment: "Midterm Exam",
+    },
+    {
+      id: 3,
+      name: "Web Development",
+      progress: 90,
+      nextAssignment: "Group Project",
+    },
   ],
   upcomingEvents: [
-    { id: 1, title: 'Final Project Due', date: '2024-05-15', course: 'Web Development' },
-    { id: 2, title: 'Midterm Exam', date: '2024-04-20', course: 'Data Structures' },
-    { id: 3, title: 'Group Presentation', date: '2024-04-25', course: 'Introduction to Computer Science' },
+    {
+      id: 1,
+      title: "Final Project Due",
+      date: "2024-05-15",
+      course: "Web Development",
+    },
+    {
+      id: 2,
+      title: "Midterm Exam",
+      date: "2024-04-20",
+      course: "Data Structures",
+    },
+    {
+      id: 3,
+      title: "Group Presentation",
+      date: "2024-04-25",
+      course: "Introduction to Computer Science",
+    },
   ],
   alerts: [
-    { id: 1, message: 'Your Data Structures assignment is due in 2 days', type: 'warning' },
-    { id: 2, message: 'You have a new grade posted for Web Development', type: 'info' },
+    {
+      id: 1,
+      message: "Your Data Structures assignment is due in 2 days",
+      type: "warning",
+    },
+    {
+      id: 2,
+      message: "You have a new grade posted for Web Development",
+      type: "info",
+    },
   ],
 };
 
@@ -35,7 +78,9 @@ export default function StudentDashboard() {
             <div key={course.id} className="border rounded-lg p-4">
               <div className="flex justify-between items-start mb-2">
                 <h3 className="font-medium">{course.name}</h3>
-                <span className="text-sm text-gray-500">Next: {course.nextAssignment}</span>
+                <span className="text-sm text-gray-500">
+                  Next: {course.nextAssignment}
+                </span>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2">
                 <div
@@ -59,7 +104,10 @@ export default function StudentDashboard() {
         </div>
         <div className="space-y-3">
           {mockData.upcomingEvents.map((event) => (
-            <div key={event.id} className="flex items-center justify-between p-3 border rounded-lg">
+            <div
+              key={event.id}
+              className="flex items-center justify-between p-3 border rounded-lg"
+            >
               <div>
                 <h3 className="font-medium">{event.title}</h3>
                 <p className="text-sm text-gray-500">{event.course}</p>
@@ -83,7 +131,9 @@ export default function StudentDashboard() {
             <div
               key={alert.id}
               className={`p-3 rounded-lg ${
-                alert.type === 'warning' ? 'bg-yellow-50 text-yellow-800' : 'bg-blue-50 text-blue-800'
+                alert.type === "warning"
+                  ? "bg-yellow-50 text-yellow-800"
+                  : "bg-blue-50 text-blue-800"
               }`}
             >
               {alert.message}
@@ -93,4 +143,4 @@ export default function StudentDashboard() {
       </div>
     </div>
   );
-} 
+}

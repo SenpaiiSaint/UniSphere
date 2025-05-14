@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { FiPlus, FiTrash2, FiSave } from 'react-icons/fi';
+import React, { useState } from "react";
+import { FiPlus, FiTrash2, FiSave } from "react-icons/fi";
 
 interface RubricItem {
   id: string;
@@ -17,43 +17,54 @@ interface RubricGradingProps {
 export const RubricGrading = ({ onSave }: RubricGradingProps) => {
   const [rubricItems, setRubricItems] = useState<RubricItem[]>([
     {
-      id: '1',
-      category: 'Content',
+      id: "1",
+      category: "Content",
       weight: 40,
-      criteria: ['Excellent understanding', 'Good understanding', 'Basic understanding', 'Limited understanding']
+      criteria: [
+        "Excellent understanding",
+        "Good understanding",
+        "Basic understanding",
+        "Limited understanding",
+      ],
     },
     {
-      id: '2',
-      category: 'Presentation',
+      id: "2",
+      category: "Presentation",
       weight: 30,
-      criteria: ['Professional', 'Good', 'Basic', 'Needs improvement']
+      criteria: ["Professional", "Good", "Basic", "Needs improvement"],
     },
     {
-      id: '3',
-      category: 'Research',
+      id: "3",
+      category: "Research",
       weight: 30,
-      criteria: ['Extensive', 'Good', 'Basic', 'Limited']
-    }
+      criteria: ["Extensive", "Good", "Basic", "Limited"],
+    },
   ]);
 
   const addRubricItem = () => {
     const newItem: RubricItem = {
       id: Date.now().toString(),
-      category: '',
+      category: "",
       weight: 0,
-      criteria: ['Excellent', 'Good', 'Basic', 'Poor']
+      criteria: ["Excellent", "Good", "Basic", "Poor"],
     };
     setRubricItems([...rubricItems, newItem]);
   };
 
   const removeRubricItem = (id: string) => {
-    setRubricItems(rubricItems.filter(item => item.id !== id));
+    setRubricItems(rubricItems.filter((item) => item.id !== id));
   };
 
-  const updateRubricItem = (id: string, field: keyof RubricItem, value: string | number | string[]) => {
-    setRubricItems(rubricItems.map(item => 
-      item.id === id ? { ...item, [field]: value } : item
-    ));
+  const updateRubricItem = (
+    id: string,
+    field: keyof RubricItem,
+    value: string | number | string[]
+  ) => {
+    setRubricItems(
+      rubricItems.map((item) =>
+        item.id === id ? { ...item, [field]: value } : item
+      )
+    );
   };
 
   const validateWeights = () => {
@@ -92,7 +103,9 @@ export const RubricGrading = ({ onSave }: RubricGradingProps) => {
                 <input
                   type="text"
                   value={item.category}
-                  onChange={(e) => updateRubricItem(item.id, 'category', e.target.value)}
+                  onChange={(e) =>
+                    updateRubricItem(item.id, "category", e.target.value)
+                  }
                   placeholder="Category name"
                   className="w-full px-3 py-2 border rounded-lg mb-2"
                 />
@@ -101,7 +114,13 @@ export const RubricGrading = ({ onSave }: RubricGradingProps) => {
                   <input
                     type="number"
                     value={item.weight}
-                    onChange={(e) => updateRubricItem(item.id, 'weight', parseInt(e.target.value))}
+                    onChange={(e) =>
+                      updateRubricItem(
+                        item.id,
+                        "weight",
+                        parseInt(e.target.value)
+                      )
+                    }
                     className="w-20 px-3 py-2 border rounded-lg"
                     min="0"
                     max="100"
@@ -116,7 +135,7 @@ export const RubricGrading = ({ onSave }: RubricGradingProps) => {
                 <FiTrash2 className="w-5 h-5" />
               </button>
             </div>
-            
+
             <div className="space-y-2">
               {item.criteria.map((criterion, index) => (
                 <input
@@ -126,7 +145,7 @@ export const RubricGrading = ({ onSave }: RubricGradingProps) => {
                   onChange={(e) => {
                     const newCriteria = [...item.criteria];
                     newCriteria[index] = e.target.value;
-                    updateRubricItem(item.id, 'criteria', newCriteria);
+                    updateRubricItem(item.id, "criteria", newCriteria);
                   }}
                   placeholder={`Criterion ${index + 1}`}
                   className="w-full px-3 py-2 border rounded-lg"
@@ -144,4 +163,4 @@ export const RubricGrading = ({ onSave }: RubricGradingProps) => {
       )}
     </div>
   );
-}; 
+};

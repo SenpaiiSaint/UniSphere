@@ -1,20 +1,27 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { mockCourses } from '../data/mockData';
-import { MainLayout } from '../components/Layout/MainLayout';
+import { useState } from "react";
+import { mockCourses } from "../data/mockData";
+import { MainLayout } from "../components/Layout/MainLayout";
 
 export default function CoursesPage() {
-  const [selectedCourse, setSelectedCourse] = useState<string>('');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCourse, setSelectedCourse] = useState<string>("");
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const formatSchedule = (schedule: { days: string[]; time: string; location: string }) => {
-    return `${schedule.days.join(', ')} ${schedule.time} (${schedule.location})`;
+  const formatSchedule = (schedule: {
+    days: string[];
+    time: string;
+    location: string;
+  }) => {
+    return `${schedule.days.join(", ")} ${schedule.time} (${
+      schedule.location
+    })`;
   };
 
-  const filteredCourses = mockCourses.filter(course => {
-    const matchesSearch = course.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         course.code.toLowerCase().includes(searchTerm.toLowerCase());
+  const filteredCourses = mockCourses.filter((course) => {
+    const matchesSearch =
+      course.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      course.code.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesFilter = !selectedCourse || course.id === selectedCourse;
     return matchesSearch && matchesFilter;
   });
@@ -37,9 +44,15 @@ export default function CoursesPage() {
               onChange={(e) => setSelectedCourse(e.target.value)}
               className="block w-48 rounded-xl border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm bg-white py-2.5 px-4 transition-all duration-200 focus:ring-2 focus:ring-blue-200 text-gray-900"
             >
-              <option value="" className="text-gray-900">All Courses</option>
-              {mockCourses.map(course => (
-                <option key={course.id} value={course.id} className="text-gray-900">
+              <option value="" className="text-gray-900">
+                All Courses
+              </option>
+              {mockCourses.map((course) => (
+                <option
+                  key={course.id}
+                  value={course.id}
+                  className="text-gray-900"
+                >
                   {course.name}
                 </option>
               ))}
@@ -55,13 +68,17 @@ export default function CoursesPage() {
             >
               <div className="p-6">
                 <div className="flex items-center justify-between">
-                  <h2 className="text-lg font-semibold text-gray-900">{course.name}</h2>
+                  <h2 className="text-lg font-semibold text-gray-900">
+                    {course.name}
+                  </h2>
                   <span className="inline-flex items-center rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-900">
                     {course.code}
                   </span>
                 </div>
-                <p className="mt-2 text-sm font-medium text-gray-700">{course.description}</p>
-                
+                <p className="mt-2 text-sm font-medium text-gray-700">
+                  {course.description}
+                </p>
+
                 <div className="mt-4 space-y-2">
                   <div className="flex items-center text-sm text-gray-700">
                     <span className="font-medium">Professor:</span>
@@ -73,7 +90,9 @@ export default function CoursesPage() {
                   </div>
                   <div className="flex items-center text-sm text-gray-700">
                     <span className="font-medium">Schedule:</span>
-                    <span className="ml-2">{formatSchedule(course.schedule)}</span>
+                    <span className="ml-2">
+                      {formatSchedule(course.schedule)}
+                    </span>
                   </div>
                   <div className="flex items-center text-sm text-gray-700">
                     <span className="font-medium">Semester:</span>
@@ -91,9 +110,9 @@ export default function CoursesPage() {
                   <div className="mt-2 h-2 w-full rounded-full bg-gray-200">
                     <div
                       className="h-2 rounded-full bg-blue-600"
-                      style={{ 
+                      style={{
                         width: `${(course.students.length / 40) * 100}%`,
-                        maxWidth: '100%'
+                        maxWidth: "100%",
                       }}
                     />
                   </div>
@@ -105,4 +124,4 @@ export default function CoursesPage() {
       </div>
     </MainLayout>
   );
-} 
+}

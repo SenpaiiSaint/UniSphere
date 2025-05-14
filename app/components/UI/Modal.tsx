@@ -1,25 +1,25 @@
-'use client';
+"use client";
 
-import { Dialog, Transition } from '@headlessui/react';
-import { Fragment, ReactNode, useEffect, useState } from 'react';
-import { XMarkIcon } from '@heroicons/react/24/outline';
-import { cn } from '@/app/utils/cn';
+import { Dialog, Transition } from "@headlessui/react";
+import { Fragment, ReactNode, useEffect, useState } from "react";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import { cn } from "@/app/utils/cn";
 
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   title: string;
   children: ReactNode;
-  size?: 'sm' | 'md' | 'lg' | 'xl';
+  size?: "sm" | "md" | "lg" | "xl";
   showCloseButton?: boolean;
   className?: string;
 }
 
 const sizeClasses = {
-  sm: 'max-w-sm',
-  md: 'max-w-md',
-  lg: 'max-w-lg',
-  xl: 'max-w-xl',
+  sm: "max-w-sm",
+  md: "max-w-md",
+  lg: "max-w-lg",
+  xl: "max-w-xl",
 };
 
 export function Modal({
@@ -27,7 +27,7 @@ export function Modal({
   onClose,
   title,
   children,
-  size = 'md',
+  size = "md",
   showCloseButton = true,
   className,
 }: ModalProps) {
@@ -69,7 +69,7 @@ export function Modal({
             >
               <Dialog.Panel
                 className={cn(
-                  'w-full transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all',
+                  "w-full transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all",
                   sizeClasses[size],
                   className
                 )}
@@ -98,4 +98,4 @@ export function Modal({
       </Dialog>
     </Transition>
   );
-} 
+}

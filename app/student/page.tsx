@@ -1,22 +1,50 @@
-'use client';
+"use client";
 
-import React, { useState, lazy, useEffect } from 'react';
-import { FiHome, FiUsers, FiBook, FiTrendingUp, FiHelpCircle, FiBell, FiSearch } from 'react-icons/fi';
-import DashboardSettings from '../components/Student/DashboardSettings';
-import LazySection from '../components/Student/LazySection';
+import React, { useState, lazy, useEffect } from "react";
+import {
+  FiHome,
+  FiUsers,
+  FiBook,
+  FiTrendingUp,
+  FiHelpCircle,
+  FiBell,
+  FiSearch,
+} from "react-icons/fi";
+import DashboardSettings from "../components/Student/DashboardSettings";
+import LazySection from "../components/Student/LazySection";
 
 // Lazy load components
-const QuickActions = lazy(() => import('../components/Student/QuickActions'));
-const StudentDashboard = lazy(() => import('../components/Student/StudentDashboard'));
-const StudyGroupFinder = lazy(() => import('../components/Student/StudyGroupFinder'));
-const StudyGroupCalendar = lazy(() => import('../components/Student/StudyGroupCalendar'));
-const StudyGroupChat = lazy(() => import('../components/Student/StudyGroupChat'));
-const ResourceLibrary = lazy(() => import('../components/Student/ResourceLibrary'));
-const ProgressTracking = lazy(() => import('../components/Student/ProgressTracking'));
-const ProgressAnalytics = lazy(() => import('../components/Student/ProgressAnalytics'));
-const CourseRecommendations = lazy(() => import('../components/Student/CourseRecommendations'));
-const AcademicProgress = lazy(() => import('../components/Student/AcademicProgress'));
-const SupportTickets = lazy(() => import('../components/Student/SupportTickets'));
+const QuickActions = lazy(() => import("../components/Student/QuickActions"));
+const StudentDashboard = lazy(
+  () => import("../components/Student/StudentDashboard")
+);
+const StudyGroupFinder = lazy(
+  () => import("../components/Student/StudyGroupFinder")
+);
+const StudyGroupCalendar = lazy(
+  () => import("../components/Student/StudyGroupCalendar")
+);
+const StudyGroupChat = lazy(
+  () => import("../components/Student/StudyGroupChat")
+);
+const ResourceLibrary = lazy(
+  () => import("../components/Student/ResourceLibrary")
+);
+const ProgressTracking = lazy(
+  () => import("../components/Student/ProgressTracking")
+);
+const ProgressAnalytics = lazy(
+  () => import("../components/Student/ProgressAnalytics")
+);
+const CourseRecommendations = lazy(
+  () => import("../components/Student/CourseRecommendations")
+);
+const AcademicProgress = lazy(
+  () => import("../components/Student/AcademicProgress")
+);
+const SupportTickets = lazy(
+  () => import("../components/Student/SupportTickets")
+);
 
 // Loading component
 const LoadingSpinner = () => (
@@ -27,15 +55,15 @@ const LoadingSpinner = () => (
 
 // Tab configuration
 const tabs = [
-  { id: 'dashboard', label: 'Dashboard', icon: FiHome },
-  { id: 'study', label: 'Study Groups', icon: FiUsers },
-  { id: 'resources', label: 'Resources', icon: FiBook },
-  { id: 'progress', label: 'Progress', icon: FiTrendingUp },
-  { id: 'support', label: 'Support', icon: FiHelpCircle },
+  { id: "dashboard", label: "Dashboard", icon: FiHome },
+  { id: "study", label: "Study Groups", icon: FiUsers },
+  { id: "resources", label: "Resources", icon: FiBook },
+  { id: "progress", label: "Progress", icon: FiTrendingUp },
+  { id: "support", label: "Support", icon: FiHelpCircle },
 ];
 
 export default function StudentPortal() {
-  const [activeTab, setActiveTab] = useState('dashboard');
+  const [activeTab, setActiveTab] = useState("dashboard");
   const [expandedSections, setExpandedSections] = useState({
     quickActions: true,
     studyGroups: false,
@@ -54,7 +82,7 @@ export default function StudentPortal() {
   }, []);
 
   const toggleSection = (section: SectionKey) => {
-    setExpandedSections(prev => ({
+    setExpandedSections((prev) => ({
       ...prev,
       [section]: !prev[section],
     }));
@@ -67,7 +95,9 @@ export default function StudentPortal() {
         <div className="fixed top-4 right-4 z-50 animate-slide-in">
           <div className="bg-white rounded-lg shadow-lg p-4 border-l-4 border-blue-600">
             <h3 className="font-semibold text-gray-900">Welcome back!</h3>
-            <p className="text-sm text-gray-600">You have 2 upcoming study sessions today.</p>
+            <p className="text-sm text-gray-600">
+              You have 2 upcoming study sessions today.
+            </p>
           </div>
         </div>
       )}
@@ -97,17 +127,17 @@ export default function StudentPortal() {
               <DashboardSettings />
             </div>
           </div>
-          
+
           {/* Tab Navigation */}
           <nav className="flex space-x-2 p-4 border-t border-gray-100">
-            {tabs.map(tab => (
+            {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 className={`flex items-center gap-2 px-4 py-2.5 rounded-lg transition-all duration-200 ease-in-out ${
-                  activeTab === tab.id 
-                    ? 'bg-blue-600 text-white shadow-md shadow-blue-200 scale-105' 
-                    : 'text-gray-600 hover:bg-gray-50 hover:scale-105'
+                  activeTab === tab.id
+                    ? "bg-blue-600 text-white shadow-md shadow-blue-200 scale-105"
+                    : "text-gray-600 hover:bg-gray-50 hover:scale-105"
                 }`}
               >
                 <tab.icon className="w-5 h-5" />
@@ -172,7 +202,7 @@ export default function StudentPortal() {
       <main className="max-w-7xl mx-auto px-4 py-8">
         <div className="transition-all duration-300 ease-in-out">
           {/* Dashboard Tab */}
-          {activeTab === 'dashboard' && (
+          {activeTab === "dashboard" && (
             <div className="space-y-8">
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <div className="lg:col-span-2 space-y-8">
@@ -196,7 +226,7 @@ export default function StudentPortal() {
           )}
 
           {/* Study Groups Tab */}
-          {activeTab === 'study' && (
+          {activeTab === "study" && (
             <div className="space-y-8">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <LazySection>
@@ -213,7 +243,7 @@ export default function StudentPortal() {
           )}
 
           {/* Resources Tab */}
-          {activeTab === 'resources' && (
+          {activeTab === "resources" && (
             <div className="space-y-8">
               <LazySection>
                 <ResourceLibrary />
@@ -222,7 +252,7 @@ export default function StudentPortal() {
           )}
 
           {/* Progress Tab */}
-          {activeTab === 'progress' && (
+          {activeTab === "progress" && (
             <div className="space-y-8">
               <LazySection>
                 <ProgressTracking />
@@ -234,7 +264,7 @@ export default function StudentPortal() {
           )}
 
           {/* Support Tab */}
-          {activeTab === 'support' && (
+          {activeTab === "support" && (
             <div className="space-y-8">
               <LazySection>
                 <SupportTickets />
@@ -245,4 +275,4 @@ export default function StudentPortal() {
       </main>
     </div>
   );
-} 
+}

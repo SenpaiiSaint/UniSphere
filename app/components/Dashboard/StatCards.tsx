@@ -1,7 +1,14 @@
-'use client'
+"use client";
 
 import React from "react";
-import { FiTrendingDown, FiTrendingUp, FiBook, FiUsers, FiFileText, FiAward } from "react-icons/fi";
+import {
+  FiTrendingDown,
+  FiTrendingUp,
+  FiBook,
+  FiUsers,
+  FiFileText,
+  FiAward,
+} from "react-icons/fi";
 
 export const StatCards = () => {
   return (
@@ -61,21 +68,25 @@ const Card = ({
     <div className="col-span-3 p-4 rounded-lg bg-white shadow-sm border border-stone-200">
       <div className="flex mb-4 items-start justify-between">
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-opacity-10">
-            {icon}
-          </div>
+          <div className="p-2 rounded-lg bg-opacity-10">{icon}</div>
           <div>
-            <h3 className="text-stone-500 text-sm font-medium">
-              {title}
-            </h3>
+            <h3 className="text-stone-500 text-sm font-medium">{title}</h3>
             <p className="text-2xl font-semibold mt-1">{value}</p>
           </div>
         </div>
 
-        <span className={`text-xs flex items-center gap-1 font-medium px-2 py-1 rounded-full ${
-          trend === "up" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
-        }`}>
-          {trend === "up" ? <FiTrendingUp className="w-3 h-3" /> : <FiTrendingDown className="w-3 h-3" />}
+        <span
+          className={`text-xs flex items-center gap-1 font-medium px-2 py-1 rounded-full ${
+            trend === "up"
+              ? "bg-green-100 text-green-700"
+              : "bg-red-100 text-red-700"
+          }`}
+        >
+          {trend === "up" ? (
+            <FiTrendingUp className="w-3 h-3" />
+          ) : (
+            <FiTrendingDown className="w-3 h-3" />
+          )}
           {pillText}
         </span>
       </div>

@@ -150,7 +150,10 @@ const metrics = [
 
 export const ActivityGraph = () => {
   return (
-    <div className="col-span-8 overflow-hidden rounded-lg bg-white shadow-sm border border-stone-200" suppressHydrationWarning>
+    <div
+      className="col-span-8 overflow-hidden rounded-lg bg-white shadow-sm border border-stone-200"
+      suppressHydrationWarning
+    >
       <div className="p-4 border-b border-stone-200">
         <h3 className="flex items-center gap-1.5 font-medium text-stone-700">
           <FiActivity className="w-4 h-4 text-blue-600" />
@@ -167,8 +170,16 @@ export const ActivityGraph = () => {
                 <div className={`text-2xl font-bold ${metric.color}`}>
                   {metric.value}
                 </div>
-                <div className={`text-sm flex items-center gap-1 ${metric.trend === "up" ? "text-green-600" : "text-red-600"}`}>
-                  {metric.trend === "up" ? <FiTrendingUp className="w-4 h-4" /> : <FiTrendingDown className="w-4 h-4" />}
+                <div
+                  className={`text-sm flex items-center gap-1 ${
+                    metric.trend === "up" ? "text-green-600" : "text-red-600"
+                  }`}
+                >
+                  {metric.trend === "up" ? (
+                    <FiTrendingUp className="w-4 h-4" />
+                  ) : (
+                    <FiTrendingDown className="w-4 h-4" />
+                  )}
                   {metric.change}
                 </div>
               </div>
@@ -179,13 +190,17 @@ export const ActivityGraph = () => {
         {/* Charts */}
         <div className="grid grid-cols-2 gap-4">
           <div className="bg-gray-50 p-4 rounded-lg">
-            <h4 className="text-sm font-medium text-gray-700 mb-4">Assignments & Quizzes</h4>
+            <h4 className="text-sm font-medium text-gray-700 mb-4">
+              Assignments & Quizzes
+            </h4>
             <div className="h-48">
               <Bar options={barOptions} data={activityData} />
             </div>
           </div>
           <div className="bg-gray-50 p-4 rounded-lg">
-            <h4 className="text-sm font-medium text-gray-700 mb-4">Course Engagement</h4>
+            <h4 className="text-sm font-medium text-gray-700 mb-4">
+              Course Engagement
+            </h4>
             <div className="h-48">
               <Line options={lineOptions} data={engagementData} />
             </div>

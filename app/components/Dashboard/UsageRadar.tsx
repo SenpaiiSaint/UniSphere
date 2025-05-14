@@ -146,7 +146,9 @@ export function CourseDistributionChart() {
                     }}
                   >
                     <div className="text-xs font-medium">{d.data.name}</div>
-                    <div className="text-xs text-gray-500">{d.data.avgGrade}</div>
+                    <div className="text-xs text-gray-500">
+                      {d.data.avgGrade}
+                    </div>
                   </div>
                 )}
               </div>
@@ -173,8 +175,13 @@ export const UsageRadar = () => {
           {courseData.map((course) => (
             <div key={course.name} className="text-center">
               <div className="text-sm font-medium">{course.name}</div>
-              <div className="text-xs text-gray-500">{course.enrollment} students</div>
-              <div className="text-xs font-medium" style={{ color: course.color.replace('text-', '') }}>
+              <div className="text-xs text-gray-500">
+                {course.enrollment} students
+              </div>
+              <div
+                className="text-xs font-medium"
+                style={{ color: course.color.replace("text-", "") }}
+              >
                 {course.avgGrade}
               </div>
             </div>

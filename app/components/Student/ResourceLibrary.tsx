@@ -1,60 +1,78 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { FiBook, FiSearch, FiDownload, FiEye, FiFile, FiVideo, FiBookOpen } from 'react-icons/fi';
+import React, { useState } from "react";
+import {
+  FiBook,
+  FiSearch,
+  FiDownload,
+  FiEye,
+  FiFile,
+  FiVideo,
+  FiBookOpen,
+} from "react-icons/fi";
 
 // Mock data - in a real app, this would come from an API
 const mockResources = [
   {
     id: 1,
-    title: 'Data Structures Lecture Notes',
-    type: 'document',
-    course: 'Data Structures',
-    uploadDate: '2024-03-15',
+    title: "Data Structures Lecture Notes",
+    type: "document",
+    course: "Data Structures",
+    uploadDate: "2024-03-15",
     downloads: 45,
     icon: <FiFile className="w-5 h-5 text-blue-600" />,
   },
   {
     id: 2,
-    title: 'Web Development Tutorial',
-    type: 'video',
-    course: 'Web Development',
-    uploadDate: '2024-03-14',
+    title: "Web Development Tutorial",
+    type: "video",
+    course: "Web Development",
+    uploadDate: "2024-03-14",
     downloads: 32,
     icon: <FiVideo className="w-5 h-5 text-red-600" />,
   },
   {
     id: 3,
-    title: 'Introduction to Algorithms',
-    type: 'book',
-    course: 'Data Structures',
-    uploadDate: '2024-03-13',
+    title: "Introduction to Algorithms",
+    type: "book",
+    course: "Data Structures",
+    uploadDate: "2024-03-13",
     downloads: 28,
     icon: <FiBookOpen className="w-5 h-5 text-green-600" />,
   },
   {
     id: 4,
-    title: 'HTML/CSS Cheat Sheet',
-    type: 'document',
-    course: 'Web Development',
-    uploadDate: '2024-03-12',
+    title: "HTML/CSS Cheat Sheet",
+    type: "document",
+    course: "Web Development",
+    uploadDate: "2024-03-12",
     downloads: 56,
     icon: <FiFile className="w-5 h-5 text-blue-600" />,
   },
 ];
 
-const courses = ['All Courses', 'Data Structures', 'Web Development', 'Introduction to Computer Science'];
-const resourceTypes = ['All Types', 'Document', 'Video', 'Book'];
+const courses = [
+  "All Courses",
+  "Data Structures",
+  "Web Development",
+  "Introduction to Computer Science",
+];
+const resourceTypes = ["All Types", "Document", "Video", "Book"];
 
 export default function ResourceLibrary() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCourse, setSelectedCourse] = useState('All Courses');
-  const [selectedType, setSelectedType] = useState('All Types');
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCourse, setSelectedCourse] = useState("All Courses");
+  const [selectedType, setSelectedType] = useState("All Types");
 
-  const filteredResources = mockResources.filter(resource => {
-    const matchesSearch = resource.title.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCourse = selectedCourse === 'All Courses' || resource.course === selectedCourse;
-    const matchesType = selectedType === 'All Types' || resource.type === selectedType.toLowerCase();
+  const filteredResources = mockResources.filter((resource) => {
+    const matchesSearch = resource.title
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+    const matchesCourse =
+      selectedCourse === "All Courses" || resource.course === selectedCourse;
+    const matchesType =
+      selectedType === "All Types" ||
+      resource.type === selectedType.toLowerCase();
     return matchesSearch && matchesCourse && matchesType;
   });
 
@@ -84,8 +102,10 @@ export default function ResourceLibrary() {
             onChange={(e) => setSelectedCourse(e.target.value)}
             className="flex-1 px-2 py-1.5 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            {courses.map(course => (
-              <option key={course} value={course}>{course}</option>
+            {courses.map((course) => (
+              <option key={course} value={course}>
+                {course}
+              </option>
             ))}
           </select>
 
@@ -94,8 +114,10 @@ export default function ResourceLibrary() {
             onChange={(e) => setSelectedType(e.target.value)}
             className="w-[120px] px-2 pr-0.5 py-1.5 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            {resourceTypes.map(type => (
-              <option key={type} value={type}>{type}</option>
+            {resourceTypes.map((type) => (
+              <option key={type} value={type}>
+                {type}
+              </option>
             ))}
           </select>
         </div>
@@ -109,7 +131,9 @@ export default function ResourceLibrary() {
               <div className="flex items-start gap-2 min-w-0">
                 {resource.icon}
                 <div className="min-w-0">
-                  <h3 className="font-medium text-sm truncate">{resource.title}</h3>
+                  <h3 className="font-medium text-sm truncate">
+                    {resource.title}
+                  </h3>
                   <p className="text-xs text-gray-500">{resource.course}</p>
                 </div>
               </div>
@@ -123,7 +147,9 @@ export default function ResourceLibrary() {
               </div>
             </div>
             <div className="flex justify-between items-center text-xs text-gray-500">
-              <span>Uploaded: {new Date(resource.uploadDate).toLocaleDateString()}</span>
+              <span>
+                Uploaded: {new Date(resource.uploadDate).toLocaleDateString()}
+              </span>
               <span>{resource.downloads} downloads</span>
             </div>
           </div>
@@ -137,4 +163,4 @@ export default function ResourceLibrary() {
       )}
     </div>
   );
-} 
+}

@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { AnalyticsDashboard } from '@/app/components/Analytics/AnalyticsDashboard';
-import { StudentRiskDetector } from '@/app/components/Grading/StudentRiskDetector';
-import { GradeInflationDetector } from '@/app/components/Grading/GradeInflationDetector';
-import { mockGradeData } from '@/app/data/mockData';
+import { AnalyticsDashboard } from "@/app/components/Analytics/AnalyticsDashboard";
+import { StudentRiskDetector } from "@/app/components/Grading/StudentRiskDetector";
+import { GradeInflationDetector } from "@/app/components/Grading/GradeInflationDetector";
+import { mockGradeData } from "@/app/data/mockData";
 
 export default function AnalyticsPage() {
   return (
@@ -18,4 +18,4 @@ export default function AnalyticsPage() {
       </div>
     </div>
   );
-} 
+}

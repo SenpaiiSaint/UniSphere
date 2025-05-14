@@ -1,33 +1,38 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { FiTrendingUp, FiTrendingDown, FiAward, FiCalendar } from 'react-icons/fi';
+import React, { useState } from "react";
+import {
+  FiTrendingUp,
+  FiTrendingDown,
+  FiAward,
+  FiCalendar,
+} from "react-icons/fi";
 
 // Mock data - in a real app, this would come from an API
 const mockSemesterData = [
   {
-    semester: 'Fall 2023',
+    semester: "Fall 2023",
     gpa: 3.75,
     credits: 15,
     attendance: 92,
     courses: [
-      { name: 'Data Structures', grade: 'A', credits: 3 },
-      { name: 'Web Development', grade: 'A-', credits: 3 },
-      { name: 'Database Systems', grade: 'B+', credits: 3 },
-      { name: 'Software Engineering', grade: 'A', credits: 3 },
-      { name: 'Computer Networks', grade: 'A-', credits: 3 },
+      { name: "Data Structures", grade: "A", credits: 3 },
+      { name: "Web Development", grade: "A-", credits: 3 },
+      { name: "Database Systems", grade: "B+", credits: 3 },
+      { name: "Software Engineering", grade: "A", credits: 3 },
+      { name: "Computer Networks", grade: "A-", credits: 3 },
     ],
   },
   {
-    semester: 'Spring 2024',
+    semester: "Spring 2024",
     gpa: 3.85,
     credits: 12,
     attendance: 95,
     courses: [
-      { name: 'Advanced Algorithms', grade: 'A', credits: 3 },
-      { name: 'Cloud Computing', grade: 'A-', credits: 3 },
-      { name: 'Mobile Development', grade: 'A', credits: 3 },
-      { name: 'AI Fundamentals', grade: 'A', credits: 3 },
+      { name: "Advanced Algorithms", grade: "A", credits: 3 },
+      { name: "Cloud Computing", grade: "A-", credits: 3 },
+      { name: "Mobile Development", grade: "A", credits: 3 },
+      { name: "AI Fundamentals", grade: "A", credits: 3 },
     ],
   },
 ];
@@ -39,15 +44,23 @@ const mockTrends = {
 };
 
 export default function ProgressAnalytics() {
-  const [selectedSemester, setSelectedSemester] = useState(mockSemesterData[0].semester);
-  const currentSemester = mockSemesterData.find(s => s.semester === selectedSemester);
+  const [selectedSemester, setSelectedSemester] = useState(
+    mockSemesterData[0].semester
+  );
+  const currentSemester = mockSemesterData.find(
+    (s) => s.semester === selectedSemester
+  );
 
   const calculateGPAChange = () => {
-    const currentSemester = mockSemesterData.find(s => s.semester === selectedSemester);
-    const previousSemester = mockSemesterData.find(s => s.semester === 'Fall 2023');
-    
-    if (!currentSemester || !previousSemester) return '0.00';
-    
+    const currentSemester = mockSemesterData.find(
+      (s) => s.semester === selectedSemester
+    );
+    const previousSemester = mockSemesterData.find(
+      (s) => s.semester === "Fall 2023"
+    );
+
+    if (!currentSemester || !previousSemester) return "0.00";
+
     const change = (currentSemester.gpa - previousSemester.gpa).toFixed(2);
     return change;
   };
@@ -67,7 +80,7 @@ export default function ProgressAnalytics() {
           onChange={(e) => setSelectedSemester(e.target.value)}
           className="px-3 py-1.5 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
-          {mockSemesterData.map(semester => (
+          {mockSemesterData.map((semester) => (
             <option key={semester.semester} value={semester.semester}>
               {semester.semester}
             </option>
@@ -80,9 +93,11 @@ export default function ProgressAnalytics() {
         <div className="border rounded-lg p-4">
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-sm font-medium text-gray-500">GPA</h3>
-            <span className={`flex items-center gap-1 text-sm ${
-              isGPAImproving ? 'text-green-600' : 'text-red-600'
-            }`}>
+            <span
+              className={`flex items-center gap-1 text-sm ${
+                isGPAImproving ? "text-green-600" : "text-red-600"
+              }`}
+            >
               {isGPAImproving ? <FiTrendingUp /> : <FiTrendingDown />}
               {gpaChange}
             </span>
@@ -103,20 +118,26 @@ export default function ProgressAnalytics() {
             <h3 className="text-sm font-medium text-gray-500">Attendance</h3>
             <FiCalendar className="w-4 h-4 text-blue-600" />
           </div>
-          <p className="text-2xl font-semibold">{currentSemester?.attendance}%</p>
+          <p className="text-2xl font-semibold">
+            {currentSemester?.attendance}%
+          </p>
         </div>
       </div>
 
       {/* Course Performance */}
       <div className="mb-6">
-        <h3 className="text-sm font-medium text-gray-500 mb-3">Course Performance</h3>
+        <h3 className="text-sm font-medium text-gray-500 mb-3">
+          Course Performance
+        </h3>
         <div className="space-y-3">
           {currentSemester?.courses.map((course, index) => (
             <div key={index} className="border rounded-lg p-3">
               <div className="flex justify-between items-center">
                 <div>
                   <h4 className="font-medium">{course.name}</h4>
-                  <p className="text-sm text-gray-500">{course.credits} credits</p>
+                  <p className="text-sm text-gray-500">
+                    {course.credits} credits
+                  </p>
                 </div>
                 <span className="text-lg font-semibold">{course.grade}</span>
               </div>
@@ -127,7 +148,9 @@ export default function ProgressAnalytics() {
 
       {/* Progress Trends */}
       <div>
-        <h3 className="text-sm font-medium text-gray-500 mb-3">Progress Trends</h3>
+        <h3 className="text-sm font-medium text-gray-500 mb-3">
+          Progress Trends
+        </h3>
         <div className="space-y-4">
           {/* GPA Trend */}
           <div>
@@ -142,7 +165,8 @@ export default function ProgressAnalytics() {
                   className="flex-1 bg-blue-100 rounded-t"
                   style={{
                     height: `${(gpa / 4) * 100}%`,
-                    backgroundColor: gpa === currentSemester?.gpa ? '#2563eb' : '#dbeafe',
+                    backgroundColor:
+                      gpa === currentSemester?.gpa ? "#2563eb" : "#dbeafe",
                   }}
                 />
               ))}
@@ -162,7 +186,10 @@ export default function ProgressAnalytics() {
                   className="flex-1 bg-green-100 rounded-t"
                   style={{
                     height: `${attendance}%`,
-                    backgroundColor: attendance === currentSemester?.attendance ? '#16a34a' : '#dcfce7',
+                    backgroundColor:
+                      attendance === currentSemester?.attendance
+                        ? "#16a34a"
+                        : "#dcfce7",
                   }}
                 />
               ))}
@@ -172,4 +199,4 @@ export default function ProgressAnalytics() {
       </div>
     </div>
   );
-} 
+}

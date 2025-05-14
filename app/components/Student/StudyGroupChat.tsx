@@ -1,7 +1,13 @@
-'use client';
+"use client";
 
-import React, { useState, useRef, useEffect } from 'react';
-import { FiMessageSquare, FiPaperclip, FiSend, FiThumbsUp, FiStar } from 'react-icons/fi';
+import React, { useState, useRef, useEffect } from "react";
+import {
+  FiMessageSquare,
+  FiPaperclip,
+  FiSend,
+  FiThumbsUp,
+  FiStar,
+} from "react-icons/fi";
 
 interface Message {
   id: number;
@@ -21,48 +27,44 @@ interface Message {
 const mockMessages: Message[] = [
   {
     id: 1,
-    sender: 'Sarah Johnson',
-    content: 'Hey everyone! I found a great resource for the upcoming exam.',
-    timestamp: '2024-03-19T14:30:00',
-    attachments: [
-      { name: 'Study Guide.pdf', type: 'pdf', size: '2.4MB' }
-    ],
+    sender: "Sarah Johnson",
+    content: "Hey everyone! I found a great resource for the upcoming exam.",
+    timestamp: "2024-03-19T14:30:00",
+    attachments: [{ name: "Study Guide.pdf", type: "pdf", size: "2.4MB" }],
     likes: 3,
     isStarred: true,
   },
   {
     id: 2,
-    sender: 'Michael Chen',
-    content: 'Thanks for sharing! This will be really helpful.',
-    timestamp: '2024-03-19T14:35:00',
+    sender: "Michael Chen",
+    content: "Thanks for sharing! This will be really helpful.",
+    timestamp: "2024-03-19T14:35:00",
     likes: 1,
   },
   {
     id: 3,
-    sender: 'Emma Davis',
-    content: 'I\'ve created a practice quiz for us to review together.',
-    timestamp: '2024-03-19T14:40:00',
-    attachments: [
-      { name: 'Practice Quiz.docx', type: 'doc', size: '1.8MB' }
-    ],
+    sender: "Emma Davis",
+    content: "I've created a practice quiz for us to review together.",
+    timestamp: "2024-03-19T14:40:00",
+    attachments: [{ name: "Practice Quiz.docx", type: "doc", size: "1.8MB" }],
     likes: 2,
   },
 ];
 
 const mockGroups = [
-  { id: 1, name: 'Data Structures Study Group', members: 3 },
-  { id: 2, name: 'Web Dev Project Team', members: 4 },
+  { id: 1, name: "Data Structures Study Group", members: 3 },
+  { id: 2, name: "Web Dev Project Team", members: 4 },
 ];
 
 export default function StudyGroupChat() {
   const [selectedGroup, setSelectedGroup] = useState(mockGroups[0].name);
   const [messages, setMessages] = useState(mockMessages);
-  const [newMessage, setNewMessage] = useState('');
+  const [newMessage, setNewMessage] = useState("");
   const [attachments, setAttachments] = useState<File[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   useEffect(() => {
@@ -75,19 +77,19 @@ export default function StudyGroupChat() {
 
     const message = {
       id: messages.length + 1,
-      sender: 'You',
+      sender: "You",
       content: newMessage,
       timestamp: new Date().toISOString(),
-      attachments: attachments.map(file => ({
+      attachments: attachments.map((file) => ({
         name: file.name,
-        type: file.type.split('/')[1],
-        size: `${(file.size / 1024 / 1024).toFixed(1)}MB`
+        type: file.type.split("/")[1],
+        size: `${(file.size / 1024 / 1024).toFixed(1)}MB`,
       })),
       likes: 0,
     };
 
     setMessages([...messages, message]);
-    setNewMessage('');
+    setNewMessage("");
     setAttachments([]);
   };
 
@@ -98,15 +100,19 @@ export default function StudyGroupChat() {
   };
 
   const handleLike = (messageId: number) => {
-    setMessages(messages.map(msg =>
-      msg.id === messageId ? { ...msg, likes: msg.likes + 1 } : msg
-    ));
+    setMessages(
+      messages.map((msg) =>
+        msg.id === messageId ? { ...msg, likes: msg.likes + 1 } : msg
+      )
+    );
   };
 
   const handleStar = (messageId: number) => {
-    setMessages(messages.map(msg =>
-      msg.id === messageId ? { ...msg, isStarred: !msg.isStarred } : msg
-    ));
+    setMessages(
+      messages.map((msg) =>
+        msg.id === messageId ? { ...msg, isStarred: !msg.isStarred } : msg
+      )
+    );
   };
 
   return (
@@ -121,8 +127,10 @@ export default function StudyGroupChat() {
           onChange={(e) => setSelectedGroup(e.target.value)}
           className="px-3 py-1.5 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
-          {mockGroups.map(group => (
-            <option key={group.id} value={group.name}>{group.name}</option>
+          {mockGroups.map((group) => (
+            <option key={group.id} value={group.name}>
+              {group.name}
+            </option>
           ))}
         </select>
       </div>
@@ -142,7 +150,7 @@ export default function StudyGroupChat() {
                 <button
                   onClick={() => handleStar(message.id)}
                   className={`p-1 rounded-full ${
-                    message.isStarred ? 'text-yellow-500' : 'text-gray-400'
+                    message.isStarred ? "text-yellow-500" : "text-gray-400"
                   } hover:bg-gray-100`}
                 >
                   <FiStar className="w-4 h-4" />
@@ -191,7 +199,9 @@ export default function StudyGroupChat() {
                 <span>{file.name}</span>
                 <button
                   type="button"
-                  onClick={() => setAttachments(attachments.filter((_, i) => i !== index))}
+                  onClick={() =>
+                    setAttachments(attachments.filter((_, i) => i !== index))
+                  }
                   className="text-gray-500 hover:text-red-600"
                 >
                   ×
@@ -227,4 +237,4 @@ export default function StudyGroupChat() {
       </form>
     </div>
   );
-} 
+}

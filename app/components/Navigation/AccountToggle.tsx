@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { FiUser } from 'react-icons/fi';
+import React from "react";
+import { FiUser } from "react-icons/fi";
 
 export const AccountToggle = () => {
   return (
@@ -19,4 +19,4 @@ export const AccountToggle = () => {
       </div>
     </div>
   );
-}; 
+};

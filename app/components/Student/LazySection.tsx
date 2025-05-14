@@ -1,5 +1,5 @@
-import React, { Suspense } from 'react';
-import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
+import React, { Suspense } from "react";
+import { useIntersectionObserver } from "../../hooks/useIntersectionObserver";
 
 interface LazySectionProps {
   children: React.ReactNode;
@@ -36,10 +36,7 @@ export default function LazySection({
   });
 
   return (
-    <div 
-      ref={elementRef}
-      className="transition-all duration-300 ease-in-out"
-    >
+    <div ref={elementRef} className="transition-all duration-300 ease-in-out">
       {hasIntersected ? (
         <Suspense fallback={fallback}>
           <div className="transform transition-all duration-300 ease-in-out">
@@ -51,4 +48,4 @@ export default function LazySection({
       )}
     </div>
   );
-} 
+}

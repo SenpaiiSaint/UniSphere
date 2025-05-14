@@ -1,65 +1,74 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { FiCalendar, FiClock, FiRepeat, FiUsers, FiBell, FiPlus } from 'react-icons/fi';
+import React, { useState } from "react";
+import {
+  FiCalendar,
+  FiClock,
+  FiRepeat,
+  FiUsers,
+  FiBell,
+  FiPlus,
+} from "react-icons/fi";
 
 // Mock data - in a real app, this would come from an API
 const mockMeetings = [
   {
     id: 1,
-    title: 'Data Structures Study Group',
-    start: '2024-03-20T15:00:00',
-    end: '2024-03-20T16:30:00',
-    group: 'Data Structures Study Group',
+    title: "Data Structures Study Group",
+    start: "2024-03-20T15:00:00",
+    end: "2024-03-20T16:30:00",
+    group: "Data Structures Study Group",
     recurring: true,
-    frequency: 'weekly',
-    participants: ['Sarah Johnson', 'Michael Chen', 'Emma Davis'],
+    frequency: "weekly",
+    participants: ["Sarah Johnson", "Michael Chen", "Emma Davis"],
   },
   {
     id: 2,
-    title: 'Web Dev Project Meeting',
-    start: '2024-03-22T14:00:00',
-    end: '2024-03-22T15:00:00',
-    group: 'Web Dev Project Team',
+    title: "Web Dev Project Meeting",
+    start: "2024-03-22T14:00:00",
+    end: "2024-03-22T15:00:00",
+    group: "Web Dev Project Team",
     recurring: false,
-    participants: ['John Smith', 'Lisa Wang'],
+    participants: ["John Smith", "Lisa Wang"],
   },
 ];
 
 const mockGroups = [
-  { id: 1, name: 'Data Structures Study Group', members: 3 },
-  { id: 2, name: 'Web Dev Project Team', members: 4 },
+  { id: 1, name: "Data Structures Study Group", members: 3 },
+  { id: 2, name: "Web Dev Project Team", members: 4 },
 ];
 
 export default function StudyGroupCalendar() {
   const [isCreating, setIsCreating] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [newMeeting, setNewMeeting] = useState({
-    title: '',
-    start: '',
-    end: '',
-    group: '',
+    title: "",
+    start: "",
+    end: "",
+    group: "",
     recurring: false,
-    frequency: 'weekly',
+    frequency: "weekly",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // In a real app, this would create a new meeting and send notifications
-    alert('Meeting scheduled successfully! Notifications sent to participants.');
+    alert(
+      "Meeting scheduled successfully! Notifications sent to participants."
+    );
     setIsCreating(false);
     setNewMeeting({
-      title: '',
-      start: '',
-      end: '',
-      group: '',
+      title: "",
+      start: "",
+      end: "",
+      group: "",
       recurring: false,
-      frequency: 'weekly',
+      frequency: "weekly",
     });
   };
 
   // Get meetings for the selected date
-  const meetingsForDate = mockMeetings.filter(meeting => {
+  const meetingsForDate = mockMeetings.filter((meeting) => {
     const meetingDate = new Date(meeting.start);
     return meetingDate.toDateString() === selectedDate.toDateString();
   });
@@ -81,38 +90,55 @@ export default function StudyGroupCalendar() {
       </div>
 
       {isCreating ? (
-        <form onSubmit={handleSubmit} className="space-y-4 border rounded-lg p-4">
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-4 border rounded-lg p-4"
+        >
           <div>
-            <label className="block text-sm font-medium mb-1">Meeting Title</label>
+            <label className="block text-sm font-medium mb-1">
+              Meeting Title
+            </label>
             <input
               type="text"
               value={newMeeting.title}
-              onChange={(e) => setNewMeeting({ ...newMeeting, title: e.target.value })}
+              onChange={(e) =>
+                setNewMeeting({ ...newMeeting, title: e.target.value })
+              }
               className="w-full px-3 py-2 border rounded-lg"
               required
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Study Group</label>
+            <label className="block text-sm font-medium mb-1">
+              Study Group
+            </label>
             <select
               value={newMeeting.group}
-              onChange={(e) => setNewMeeting({ ...newMeeting, group: e.target.value })}
+              onChange={(e) =>
+                setNewMeeting({ ...newMeeting, group: e.target.value })
+              }
               className="w-full px-3 py-2 border rounded-lg"
               required
             >
               <option value="">Select a group</option>
-              {mockGroups.map(group => (
-                <option key={group.id} value={group.name}>{group.name}</option>
+              {mockGroups.map((group) => (
+                <option key={group.id} value={group.name}>
+                  {group.name}
+                </option>
               ))}
             </select>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium mb-1">Start Time</label>
+              <label className="block text-sm font-medium mb-1">
+                Start Time
+              </label>
               <input
                 type="datetime-local"
                 value={newMeeting.start}
-                onChange={(e) => setNewMeeting({ ...newMeeting, start: e.target.value })}
+                onChange={(e) =>
+                  setNewMeeting({ ...newMeeting, start: e.target.value })
+                }
                 className="w-full px-3 py-2 border rounded-lg"
                 required
               />
@@ -122,7 +148,9 @@ export default function StudyGroupCalendar() {
               <input
                 type="datetime-local"
                 value={newMeeting.end}
-                onChange={(e) => setNewMeeting({ ...newMeeting, end: e.target.value })}
+                onChange={(e) =>
+                  setNewMeeting({ ...newMeeting, end: e.target.value })
+                }
                 className="w-full px-3 py-2 border rounded-lg"
                 required
               />
@@ -133,17 +161,25 @@ export default function StudyGroupCalendar() {
               type="checkbox"
               id="recurring"
               checked={newMeeting.recurring}
-              onChange={(e) => setNewMeeting({ ...newMeeting, recurring: e.target.checked })}
+              onChange={(e) =>
+                setNewMeeting({ ...newMeeting, recurring: e.target.checked })
+              }
               className="rounded border-gray-300"
             />
-            <label htmlFor="recurring" className="text-sm font-medium">Recurring Meeting</label>
+            <label htmlFor="recurring" className="text-sm font-medium">
+              Recurring Meeting
+            </label>
           </div>
           {newMeeting.recurring && (
             <div>
-              <label className="block text-sm font-medium mb-1">Frequency</label>
+              <label className="block text-sm font-medium mb-1">
+                Frequency
+              </label>
               <select
                 value={newMeeting.frequency}
-                onChange={(e) => setNewMeeting({ ...newMeeting, frequency: e.target.value })}
+                onChange={(e) =>
+                  setNewMeeting({ ...newMeeting, frequency: e.target.value })
+                }
                 className="w-full px-3 py-2 border rounded-lg"
               >
                 <option value="daily">Daily</option>
@@ -184,7 +220,11 @@ export default function StudyGroupCalendar() {
               ←
             </button>
             <h3 className="text-lg font-medium">
-              {selectedDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
+              {selectedDate.toLocaleDateString("en-US", {
+                weekday: "long",
+                month: "long",
+                day: "numeric",
+              })}
             </h3>
             <button
               onClick={() => {
@@ -217,7 +257,8 @@ export default function StudyGroupCalendar() {
                 <div className="flex items-center gap-4 text-sm text-gray-500">
                   <span className="flex items-center gap-1">
                     <FiClock className="w-4 h-4" />
-                    {new Date(meeting.start).toLocaleTimeString()} - {new Date(meeting.end).toLocaleTimeString()}
+                    {new Date(meeting.start).toLocaleTimeString()} -{" "}
+                    {new Date(meeting.end).toLocaleTimeString()}
                   </span>
                   <span className="flex items-center gap-1">
                     <FiUsers className="w-4 h-4" />
@@ -236,4 +277,4 @@ export default function StudyGroupCalendar() {
       )}
     </div>
   );
-} 
+}

@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { FiTrendingUp, FiUsers, FiAlertCircle } from 'react-icons/fi';
-import { type EnrollmentAnalytics } from '@/app/services/enrollmentService';
+import React from "react";
+import { FiTrendingUp, FiUsers, FiAlertCircle } from "react-icons/fi";
+import { type EnrollmentAnalytics } from "@/app/services/enrollmentService";
 
 interface Props {
   analytics: EnrollmentAnalytics;
@@ -29,7 +29,9 @@ export default function EnrollmentAnalyticsComponent({ analytics }: Props) {
             <FiAlertCircle className="text-yellow-500 mr-2" />
             <div>
               <p className="text-sm text-gray-600">Total Waitlisted</p>
-              <p className="text-lg font-semibold">{analytics.totalWaitlisted}</p>
+              <p className="text-lg font-semibold">
+                {analytics.totalWaitlisted}
+              </p>
             </div>
           </div>
         </div>
@@ -39,7 +41,12 @@ export default function EnrollmentAnalyticsComponent({ analytics }: Props) {
             <div>
               <p className="text-sm text-gray-600">Enrollment Rate</p>
               <p className="text-lg font-semibold">
-                {((analytics.totalEnrolled / (analytics.totalEnrolled + analytics.totalWaitlisted)) * 100).toFixed(1)}%
+                {(
+                  (analytics.totalEnrolled /
+                    (analytics.totalEnrolled + analytics.totalWaitlisted)) *
+                  100
+                ).toFixed(1)}
+                %
               </p>
             </div>
           </div>
@@ -61,7 +68,9 @@ export default function EnrollmentAnalyticsComponent({ analytics }: Props) {
               <div className="w-full bg-gray-200 rounded-full h-2">
                 <div
                   className="bg-blue-500 h-2 rounded-full"
-                  style={{ width: `${(course.enrolled / course.capacity) * 100}%` }}
+                  style={{
+                    width: `${(course.enrolled / course.capacity) * 100}%`,
+                  }}
                 ></div>
               </div>
             </div>
@@ -74,14 +83,19 @@ export default function EnrollmentAnalyticsComponent({ analytics }: Props) {
         <h3 className="text-lg font-semibold mb-4">Enrollment Trend</h3>
         <div className="space-y-2">
           {analytics.enrollmentTrend.map((trend, index) => (
-            <div key={index} className="flex justify-between items-center bg-gray-50 p-3 rounded-lg">
+            <div
+              key={index}
+              className="flex justify-between items-center bg-gray-50 p-3 rounded-lg"
+            >
               <span className="text-sm text-gray-600">{trend.date}</span>
               <div className="flex items-center space-x-4">
                 <span className="text-sm">
-                  Enrolled: <span className="font-medium">{trend.enrolled}</span>
+                  Enrolled:{" "}
+                  <span className="font-medium">{trend.enrolled}</span>
                 </span>
                 <span className="text-sm">
-                  Waitlisted: <span className="font-medium">{trend.waitlisted}</span>
+                  Waitlisted:{" "}
+                  <span className="font-medium">{trend.waitlisted}</span>
                 </span>
               </div>
             </div>
@@ -90,4 +104,4 @@ export default function EnrollmentAnalyticsComponent({ analytics }: Props) {
       </div>
     </div>
   );
-} 
+}

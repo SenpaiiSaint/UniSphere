@@ -1,14 +1,17 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { mockStudents, mockCourses } from '../data/mockData';
-import { MainLayout } from '../components/Layout/MainLayout';
+import { useState } from "react";
+import { mockStudents, mockCourses } from "../data/mockData";
+import { MainLayout } from "../components/Layout/MainLayout";
 
 export default function StudentsPage() {
-  const [selectedCourse, setSelectedCourse] = useState('');
+  const [selectedCourse, setSelectedCourse] = useState("");
 
-  const filteredStudents = mockStudents.filter(student => {
-    const matchesCourse = !selectedCourse || (student.enrolledCourses && student.enrolledCourses.includes(selectedCourse));
+  const filteredStudents = mockStudents.filter((student) => {
+    const matchesCourse =
+      !selectedCourse ||
+      (student.enrolledCourses &&
+        student.enrolledCourses.includes(selectedCourse));
     return matchesCourse;
   });
 
@@ -22,7 +25,7 @@ export default function StudentsPage() {
             onChange={(e) => setSelectedCourse(e.target.value)}
           >
             <option value="">All Courses</option>
-            {mockCourses.map(course => (
+            {mockCourses.map((course) => (
               <option key={course.id} value={course.id}>
                 {course.name}
               </option>
@@ -46,7 +49,9 @@ export default function StudentsPage() {
                     </div>
                   </div>
                   <div className="ml-4">
-                    <h3 className="text-lg font-medium text-gray-900">{student.name}</h3>
+                    <h3 className="text-lg font-medium text-gray-900">
+                      {student.name}
+                    </h3>
                     <p className="text-sm text-gray-500">{student.email}</p>
                   </div>
                 </div>
@@ -64,4 +69,4 @@ export default function StudentsPage() {
       </div>
     </MainLayout>
   );
-} 
+}

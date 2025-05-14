@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { CommunicationHub } from '@/app/components/Communication/CommunicationHub';
+import { CommunicationHub } from "@/app/components/Communication/CommunicationHub";
 
 export default function CommunicationPage() {
   return (
@@ -9,4 +9,4 @@ export default function CommunicationPage() {
       <CommunicationHub />
     </div>
   );
-} 
+}

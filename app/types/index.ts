@@ -3,7 +3,7 @@ export interface User {
   id: string;
   name: string;
   email: string;
-  role: 'student' | 'teacher' | 'admin';
+  role: "student" | "teacher" | "admin";
   avatar?: string;
   bio?: string;
   createdAt: Date;
@@ -18,7 +18,7 @@ export interface Course {
   teacherId: string;
   startDate: Date;
   endDate: Date;
-  status: 'active' | 'completed' | 'upcoming';
+  status: "active" | "completed" | "upcoming";
   students: string[];
   assignments: string[];
 }
@@ -30,8 +30,8 @@ export interface Assignment {
   description: string;
   dueDate: Date;
   points: number;
-  type: 'homework' | 'quiz' | 'exam' | 'project' | 'lab';
-  status: 'draft' | 'published' | 'graded';
+  type: "homework" | "quiz" | "exam" | "project" | "lab";
+  status: "draft" | "published" | "graded";
   submissions: Submission[];
   createdAt: Date;
   updatedAt: Date;
@@ -46,7 +46,7 @@ export interface Submission {
   submittedAt: Date;
   grade?: number;
   feedback?: string;
-  status: 'submitted' | 'graded' | 'late';
+  status: "submitted" | "graded" | "late";
 }
 
 export interface Grade {
@@ -87,7 +87,7 @@ export interface Schedule {
   startTime: string;
   endTime: string;
   location: string;
-  type: 'lecture' | 'lab' | 'office-hours';
+  type: "lecture" | "lab" | "office-hours";
 }
 
 // Settings Types
@@ -101,13 +101,13 @@ export interface Settings {
   };
   grading: {
     latePenalty: number;
-    rounding: 'up' | 'down' | 'nearest';
+    rounding: "up" | "down" | "nearest";
     gradeScale: Record<string, number>;
   };
   appearance: {
-    theme: 'light' | 'dark' | 'system';
+    theme: "light" | "dark" | "system";
     fontSize: number;
-    density: 'comfortable' | 'compact';
+    density: "comfortable" | "compact";
   };
 }
 
@@ -138,7 +138,7 @@ export interface FormState<T> {
 // UI Types
 export interface Toast {
   id: string;
-  type: 'success' | 'error' | 'info' | 'warning';
+  type: "success" | "error" | "info" | "warning";
   message: string;
   duration?: number;
 }
@@ -148,7 +148,7 @@ export interface ModalProps {
   onClose: () => void;
   title: string;
   children: React.ReactNode;
-  size?: 'sm' | 'md' | 'lg' | 'xl';
+  size?: "sm" | "md" | "lg" | "xl";
 }
 
 // Theme Types
@@ -192,4 +192,4 @@ export interface Theme {
       bold: number;
     };
   };
-} 
+}

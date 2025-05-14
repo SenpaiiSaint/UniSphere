@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { FiHelpCircle, FiPlus } from 'react-icons/fi';
+import React from "react";
+import { FiHelpCircle, FiPlus } from "react-icons/fi";
 
 export default function SupportTickets() {
   return (
@@ -21,4 +21,4 @@ export default function SupportTickets() {
       </div>
     </div>
   );
-} 
+}

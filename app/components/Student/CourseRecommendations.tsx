@@ -1,30 +1,31 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { FiBook } from 'react-icons/fi';
+import React from "react";
+import { FiBook } from "react-icons/fi";
 
 // Mock data - in a real app, this would come from an API
 const mockRecommendations = [
   {
     id: 1,
-    name: 'Advanced Algorithms',
-    description: 'Build on your data structures knowledge with advanced algorithm design',
+    name: "Advanced Algorithms",
+    description:
+      "Build on your data structures knowledge with advanced algorithm design",
     matchScore: 95,
-    prerequisites: ['Data Structures', 'Introduction to Computer Science'],
+    prerequisites: ["Data Structures", "Introduction to Computer Science"],
   },
   {
     id: 2,
-    name: 'Database Systems',
-    description: 'Learn about database design, implementation, and management',
+    name: "Database Systems",
+    description: "Learn about database design, implementation, and management",
     matchScore: 88,
-    prerequisites: ['Web Development'],
+    prerequisites: ["Web Development"],
   },
   {
     id: 3,
-    name: 'Software Engineering',
-    description: 'Study software development methodologies and best practices',
+    name: "Software Engineering",
+    description: "Study software development methodologies and best practices",
     matchScore: 82,
-    prerequisites: ['Introduction to Computer Science'],
+    prerequisites: ["Introduction to Computer Science"],
   },
 ];
 
@@ -47,4 +48,4 @@ export default function CourseRecommendations() {
       </div>
     </div>
   );
-} 
+}

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "motion/react"
+import { motion } from "motion/react";
 import {
   FiHome,
   FiActivity,
@@ -39,9 +39,9 @@ const menuItems: MenuItem[] = [
     title: "Business Insights",
     Icon: FiBriefcase,
     subItems: [
-      {title: "Revenue Analytics", Icon: FiShield},
+      { title: "Revenue Analytics", Icon: FiShield },
       { title: "ROI Analysis", Icon: FiSettings },
-    ]
+    ],
   },
   {
     title: "Security & System",
@@ -86,7 +86,10 @@ export const RouteSelect = () => {
           {item.subItems && (
             <motion.div
               initial={{ height: 0, opacity: 0 }}
-              animate={{ height: expandedRoutes.includes(item.title) ? "auto" : 0, opacity: expandedRoutes.includes(item.title) ? 1 : 0 }}
+              animate={{
+                height: expandedRoutes.includes(item.title) ? "auto" : 0,
+                opacity: expandedRoutes.includes(item.title) ? 1 : 0,
+              }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
               className="overflow-hidden"
